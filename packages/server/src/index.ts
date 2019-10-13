@@ -13,7 +13,7 @@ import {
 } from 'graphql-yoga/dist/types'
 
 const graphqlServer = new GraphQLServer({
-  typeDefs: './src/schema.graphql',
+  typeDefs: __dirname + '/schema.graphql',
   resolvers: resolvers as any,
   context: (contextParams: ContextParameters) => ({
     request: contextParams.request,

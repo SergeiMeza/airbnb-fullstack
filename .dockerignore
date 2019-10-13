@@ -5,3 +5,4 @@
 !./packages/server/dist
 !./packages/common/dist
 !./packages/server/.env.prod
+!./packages/server/.env.example

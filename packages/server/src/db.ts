@@ -1,7 +1,10 @@
 import * as mongodb from 'mongodb'
 
 const MongoClient = mongodb.MongoClient
-const mongoDbURL = 'mongodb://localhost:27017/airbnb_alpha?retryWrites=true'
+const mongoDbURL =
+  process.env.NODE_ENV === 'dev'
+    ? 'mongodb://host.docker.internal:27017/airbnb_alpha?retryWrites=true'
+    : 'mongodb://localhost:27017/airbnb_alpha?retryWrites=true'
 
 let _client: mongodb.MongoClient | undefined
 
