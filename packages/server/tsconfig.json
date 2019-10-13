@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": ["types/*"]
+    },
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "outDir": "dist/src",
+    "lib": ["esnext", "dom"],
+    "module": "commonjs",
+    "target": "esnext"
+  },
+  "include": ["**/*.ts", "**/*.graphql", "**/*.json"],
+  "exclude": ["node_modules"]
+}
