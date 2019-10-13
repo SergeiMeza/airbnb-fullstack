@@ -16,6 +16,6 @@ type User {
 }
 
 type Error {
-  parth: String!
+  path: String!
   message: String!
 }

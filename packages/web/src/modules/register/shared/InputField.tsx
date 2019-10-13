@@ -12,7 +12,7 @@ export const InputField: React.FunctionComponent<
   const errorMessage = touched[field.name] && errors[field.name]
   return (
     <Form.Item help={errorMessage} validateStatus={errorMessage ? 'error' : ''}>
-      <Input {...field} {...props} />,
+      <Input {...field} {...props} />
     </Form.Item>
   )
 }

@@ -9,6 +9,6 @@ export interface User {
 }
 
 export interface Error {
-  parth: string
+  path: string
   message: string
 }

@@ -312,11 +312,11 @@ export namespace MutationResolvers {
 
 export namespace ErrorResolvers {
   export const defaultResolvers = {
-    parth: (parent: Error) => parent.parth,
+    path: (parent: Error) => parent.path,
     message: (parent: Error) => parent.message
   };
 
-  export type ParthResolver =
+  export type PathResolver =
     | ((
         parent: Error,
         args: {},
@@ -351,7 +351,7 @@ export namespace ErrorResolvers {
       };
 
   export interface Type {
-    parth:
+    path:
       | ((
           parent: Error,
           args: {},

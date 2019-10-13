@@ -5,9 +5,11 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon -e ts,graphql -x ts-node src/index.ts",
-    "generate:ts": "graphqlgen"
+    "generate:ts": "graphqlgen",
+    "build": "rm -rf ./dist && tsc && copyfiles -u 1 src/**/*.graphql dist"
   },
   "dependencies": {
+    "@airbnb-fullstack/common": "1.0.0",
     "apollo-engine": "^1.1.2",
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
@@ -26,8 +28,7 @@
     "semver": "^6.3.0",
     "sharp": "^0.23.1",
     "uuid": "^3.3.3",
-    "yup": "^0.27.0",
-    "@airbnb-fullstack/common": "1.0.0"
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -41,6 +42,7 @@
     "@types/uuid": "^3.4.5",
     "@types/yup": "^0.26.24",
     "apollo": "^2.19.1",
+    "copyfiles": "^2.1.1",
     "graphql-cli": "^3.0.14",
     "graphqlgen": "^0.6.0-rc9",
     "nodemon": "^1.19.3",

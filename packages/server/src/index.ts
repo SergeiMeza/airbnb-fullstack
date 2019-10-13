@@ -1,3 +1,6 @@
+import * as Express from 'express'
+import * as ResponseTime from 'response-time'
+
 import { db } from './db'
 import { redis } from './redis'
 
@@ -8,9 +11,6 @@ import {
   Options,
   UploadOptions,
 } from 'graphql-yoga/dist/types'
-
-import * as Express from 'express'
-import * as ResponseTime from 'response-time'
 
 const graphqlServer = new GraphQLServer({
   typeDefs: './src/schema.graphql',
@@ -31,7 +31,7 @@ const uploads: UploadOptions = {
 }
 
 const options: Options = {
-  cors: { origin: true },
+  cors: { origin: true, credentials: true },
   tracing: true,
   cacheControl: true,
   port: '4000',
