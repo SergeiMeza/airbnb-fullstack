@@ -4,7 +4,8 @@
   "main": "src/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start": "nodemon -e ts,graphql -x ts-node src/index.ts",
+    "generate:ts": "graphqlgen"
   },
   "dependencies": {
     "apollo-engine": "^1.1.2",

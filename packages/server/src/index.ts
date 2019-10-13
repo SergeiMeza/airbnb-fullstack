@@ -14,11 +14,11 @@ import * as ResponseTime from 'response-time'
 
 const graphqlServer = new GraphQLServer({
   typeDefs: './src/schema.graphql',
-  // resolvers: resolvers as any,
-  // context: (contextParams: ContextParameters) => ({
-  //   request: contextParams.request,
-  //   connection: contextParams.connection,
-  // }),
+  resolvers: resolvers as any,
+  context: (contextParams: ContextParameters) => ({
+    request: contextParams.request,
+    connection: contextParams.connection,
+  }),
 })
 
 graphqlServer.express.use(ResponseTime())
@@ -37,6 +37,7 @@ const options: Options = {
   port: '4000',
   endpoint: '/graphql',
   subscriptions: '/graphql',
+  playground: '/graphql',
   uploads,
 }
 

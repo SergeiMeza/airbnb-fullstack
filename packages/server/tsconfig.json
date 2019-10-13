@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "*": ["types/*"]
-    },
+    // "paths": {
+    //   "*": ["types/*"]
+    // },
     "sourceMap": true,
     "strict": true,
     "noImplicitAny": false,
