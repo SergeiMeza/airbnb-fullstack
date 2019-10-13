@@ -1,22 +1,17 @@
 import React from 'react'
 import { Form, Icon, Button } from 'antd'
-import {
-  withFormik,
-  FormikErrors,
-  FormikProps,
-  Field,
-  Form as FForm,
-} from 'formik'
+import { withFormik, FormikProps, Field, Form as FForm } from 'formik'
 import { validUserSchema } from '@airbnb-fullstack/common'
 import { InputField } from '../../shared/InputField'
 import { Link } from 'react-router-dom'
+
 interface FormValues {
   email: string
   password: string
 }
 
 interface Props {
-  submit: (values: FormValues) => Promise<FormikErrors<FormValues> | null>
+  submit: (values: FormValues) => Promise<{ [key: string]: string } | null>
 }
 
 class C extends React.PureComponent<FormikProps<FormValues> & Props> {
@@ -47,9 +42,9 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
               className='login-form-button'
               style={{ display: 'block', width: 400 }}
             >
-              Register
+              Login
             </Button>
-            Or <Link to='/login'>login now!</Link>
+            Or <Link to='/register'>register now!</Link>
           </Form.Item>
         </div>
       </FForm>
@@ -57,7 +52,7 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
   }
 }
 
-export const RegisterView = withFormik<Props, FormValues>({
+export const LoginView = withFormik<Props, FormValues>({
   validationSchema: validUserSchema,
   mapPropsToValues: () => ({ email: '', password: '' }),
   validateOnChange: false,
