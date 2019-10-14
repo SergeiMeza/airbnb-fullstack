@@ -1,58 +1,132 @@
 import React from 'react'
-import { Form, Icon, Button } from 'antd'
 import {
-  withFormik,
-  FormikErrors,
-  FormikProps,
-  Field,
-  Form as FForm,
-} from 'formik'
+  Layout,
+  Card,
+  Form,
+  Icon,
+  Button,
+  Typography,
+  Menu,
+  Avatar,
+  Row,
+  Col,
+  Carousel,
+  Divider,
+} from 'antd'
+import { withFormik, FormikProps, Field, Form as FForm } from 'formik'
 import { validUserSchema } from '@airbnb-fullstack/common'
 import { InputField } from '../../shared/InputField'
 import { Link } from 'react-router-dom'
+import { NormalizeErrorMap } from '@airbnb-fullstack/controller'
+
 interface FormValues {
   email: string
   password: string
 }
 
 interface Props {
-  submit: (values: FormValues) => Promise<FormikErrors<FormValues> | null>
+  submit: (values: FormValues) => Promise<NormalizeErrorMap | null>
 }
 
 class C extends React.PureComponent<FormikProps<FormValues> & Props> {
   render() {
     return (
-      <FForm style={{ paddingTop: 50, display: 'flex' }}>
-        <div style={{ width: 400, margin: 'auto' }}>
-          <Field
-            name='email'
-            prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
-            placeholder='Email'
-            component={InputField}
-          />
-          <Field
-            name='password'
-            type='password'
-            prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
-            placeholder='Password'
-            component={InputField}
-          />
-          <Form.Item>
-            <a className='login-form-forgot' href=''>
-              Forgot password
-            </a>
-            <Button
-              type='primary'
-              htmlType='submit'
-              className='login-form-button'
-              style={{ display: 'block', width: 400 }}
+      <div>
+        <Layout>
+          <Layout.Header>
+            <Menu
+              theme='light'
+              mode='horizontal'
+              style={{ lineHeight: '64px' }}
             >
-              Register
-            </Button>
-            Or <Link to='/login'>login now!</Link>
-          </Form.Item>
-        </div>
-      </FForm>
+              <Menu.Item key='1'>nav 1</Menu.Item>
+              <Menu.Item key='2'>nav 2</Menu.Item>
+              <Menu.Item key='3'>nav 3</Menu.Item>
+              <Avatar icon='user' />
+            </Menu>
+          </Layout.Header>
+          <Layout.Content>
+            <Row>
+              <Col span={1} />
+              <Col span={11}>
+                <div className='main-carousel'>
+                  <Carousel autoplay>
+                    <div>
+                      <h3>1</h3>
+                    </div>
+                    <div>
+                      <h3>2</h3>
+                    </div>
+                    <div>
+                      <h3>3</h3>
+                    </div>
+                    <div>
+                      <h3>4</h3>
+                    </div>
+                  </Carousel>
+                </div>
+              </Col>
+              <Col span={1} />
+              <Col span={10}>
+                <div className='main-form'>
+                  <FForm style={{ display: 'flex' }}>
+                    <div style={{ margin: 'auto' }}>
+                      <Card bordered={false}>
+                        <Typography>
+                          <Typography.Title level={2}>
+                            Register
+                          </Typography.Title>
+                        </Typography>
+                        <Divider />
+                        <Field
+                          name='email'
+                          prefix={
+                            <Icon
+                              type='user'
+                              style={{ color: 'rgba(0,0,0,.25)' }}
+                            />
+                          }
+                          placeholder='Email'
+                          component={InputField}
+                        />
+                        <Field
+                          name='password'
+                          type='password'
+                          prefix={
+                            <Icon
+                              type='lock'
+                              style={{ color: 'rgba(0,0,0,.25)' }}
+                            />
+                          }
+                          placeholder='Password'
+                          component={InputField}
+                        />
+                        <Form.Item>
+                          <Button
+                            type='primary'
+                            htmlType='submit'
+                            className='login-form-button'
+                            style={{ display: 'block' }}
+                          >
+                            Register
+                          </Button>
+                          Or <Link to='/login'>login now!</Link>
+                        </Form.Item>
+                      </Card>
+                    </div>
+                  </FForm>
+                </div>
+              </Col>
+              <Col span={1} />
+            </Row>
+          </Layout.Content>
+          <div className='main-footer'>
+            <Layout.Footer>
+              <Divider />
+            </Layout.Footer>
+          </div>
+        </Layout>
+      </div>
     )
   }
 }

@@ -15,3 +15,11 @@ export const validUserSchema = yup.object().shape({
     .max(255)
     .required(),
 })
+
+export const validForgotPasswordSchema = yup.object().shape({
+  email: yup
+    .string()
+    .max(255)
+    .email(invalidEmail)
+    .required(),
+})

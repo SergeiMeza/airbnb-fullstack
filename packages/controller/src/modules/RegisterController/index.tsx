@@ -2,32 +2,18 @@ import React from 'react'
 import { graphql, ChildMutateProps, useMutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { RegisterMutation, RegisterMutationVariables } from '../../schemaTypes'
+import { NormalizeErrorMap } from '../../types/NormalizeErrorMap'
+import { normalizeErrors } from '../../utils/normalizeErrors'
 
 interface Props {
   children: (data: {
-    submit: (values: RegisterMutationVariables) => Promise<null>
+    submit: (
+      values: RegisterMutationVariables,
+    ) => Promise<NormalizeErrorMap | null>
   }) => JSX.Element | null
 }
 
-class C extends React.PureComponent<
-  ChildMutateProps<Props, RegisterMutation, RegisterMutationVariables>
-> {
-  submit = async (values: RegisterMutationVariables) => {
-    console.log('values:', values)
-    const response = await this.props.mutate({
-      variables: values,
-    })
-
-    console.log('response:', response)
-    return null
-  }
-
-  render() {
-    return this.props.children({ submit: this.submit })
-  }
-}
-
-const registerMutation = gql`
+const REGISTER_MUTATION = gql`
   mutation RegisterMutation($email: String!, $password: String!) {
     register(email: $email, password: $password) {
       path
@@ -36,25 +22,19 @@ const registerMutation = gql`
   }
 `
 
-export const RegisterController = graphql<
-  Props,
-  RegisterMutation,
-  RegisterMutationVariables
->(registerMutation)(C as any)
+export function RegisterControllerHooks(props: Props) {
+  const [registerMutation, { data, loading, error }] = useMutation<
+    RegisterMutation,
+    RegisterMutationVariables
+  >(REGISTER_MUTATION)
 
-// export function RegisterControllerHook(props: Props) {
-//   const submit = (values: RegisterMutationVariables) => {
-//     const [response, { loading, error }] = useMutation<
-//       RegisterMutation,
-//       RegisterMutationVariables
-//     >(registerMutation)
+  // if (loading) return <p>loading</p>
+  // if (error) return <p>error: {error.message}</p>
 
-//     if (loading) return <p>loading...</p>
-//     if (error) return <p>An error occurred</p>
+  const submit = async (values: RegisterMutationVariables) => {
+    const result = await registerMutation({ variables: values })
+    return null
+  }
 
-//     console.log('response:', response)
-//     return null
-//   }
-
-//   return props.children({ submit: submit })
-// }
+  return props.children({ submit })
+}

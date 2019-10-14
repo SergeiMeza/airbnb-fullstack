@@ -8,20 +8,10 @@ import { db } from '../../db'
 export const Mutation: MutationResolvers.Type = {
   ...MutationResolvers.defaultResolvers,
   sendForgotPasswordEmail: (parent, args, ctx) => {
-    throw new Error(
-      JSON.stringify({
-        message: RESOLVER_NOT_IMPLEMENTED,
-        path: 'sendForgotPasswordEmail',
-      }),
-    )
+    throw new Error(RESOLVER_NOT_IMPLEMENTED)
   },
   forgotPasswordChange: (parent, args, ctx) => {
-    throw new Error(
-      JSON.stringify({
-        message: RESOLVER_NOT_IMPLEMENTED,
-        path: 'forgotPasswordChange',
-      }),
-    )
+    throw new Error(RESOLVER_NOT_IMPLEMENTED)
   },
   login: async (parent, { email, password }, ctx) => {
     const response = await db
@@ -29,21 +19,13 @@ export const Mutation: MutationResolvers.Type = {
       .db()
       .collection('USER')
       .findOne({ email, password })
-    if (!response) {
-      throw new Error(
-        JSON.stringify({ message: LOGIN_USER_NOT_FOUND, path: 'login' }),
-      )
-    }
+
+    if (!response) return [{ path: 'password', message: LOGIN_USER_NOT_FOUND }]
     console.log('🚀 db.response:', JSON.stringify(response, null, 2))
     return null
   },
   logout: (parent, args, ctx) => {
-    throw new Error(
-      JSON.stringify({
-        message: RESOLVER_NOT_IMPLEMENTED,
-        path: 'logout',
-      }),
-    )
+    throw new Error(RESOLVER_NOT_IMPLEMENTED)
   },
   register: async (parent, { email, password }, ctx) => {
     const response = await db

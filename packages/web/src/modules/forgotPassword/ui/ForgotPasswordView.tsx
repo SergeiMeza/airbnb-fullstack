@@ -8,20 +8,18 @@ import {
   Button,
   Menu,
   Avatar,
-  Carousel,
   Row,
   Col,
   Divider,
 } from 'antd'
 import { withFormik, FormikProps, Field, Form as FForm } from 'formik'
-import { validUserSchema } from '@airbnb-fullstack/common'
+import { validForgotPasswordSchema } from '@airbnb-fullstack/common'
 import { InputField } from '../../shared/InputField'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { NormalizeErrorMap } from '@airbnb-fullstack/controller'
 
 interface FormValues {
   email: string
-  password: string
 }
 
 interface Props {
@@ -47,33 +45,21 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
           </Layout.Header>
           <Layout.Content>
             <Row>
-              <Col span={1} />
-              <Col span={11}>
-                <div className='main-carousel'>
-                  <Carousel autoplay>
-                    <div>
-                      <h3>1</h3>
-                    </div>
-                    <div>
-                      <h3>2</h3>
-                    </div>
-                    <div>
-                      <h3>3</h3>
-                    </div>
-                    <div>
-                      <h3>4</h3>
-                    </div>
-                  </Carousel>
-                </div>
-              </Col>
-              <Col span={1} />
-              <Col span={10}>
+              <Col span={2} />
+              <Col span={20}>
                 <div className='main-form'>
                   <FForm style={{ display: 'flex' }}>
                     <div style={{ margin: 'auto' }}>
                       <Card bordered={false}>
                         <Typography>
-                          <Typography.Title level={2}>Login</Typography.Title>
+                          <Typography.Title level={2}>
+                            Forgot Password?
+                          </Typography.Title>
+                          <Typography.Paragraph>
+                            Enter your email address to reset your password.
+                            <br /> You may need to check your spam folder or
+                            unblock no-reply@lpp.pw.
+                          </Typography.Paragraph>
                         </Typography>
                         <Divider />
                         <Field
@@ -87,36 +73,22 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
                           placeholder='Email'
                           component={InputField}
                         />
-                        <Field
-                          name='password'
-                          type='password'
-                          prefix={
-                            <Icon
-                              type='lock'
-                              style={{ color: 'rgba(0,0,0,.25)' }}
-                            />
-                          }
-                          placeholder='Password'
-                          component={InputField}
-                        />
                         <Form.Item>
-                          <Link to='/forgot'>Forgot password?</Link>
                           <Button
                             type='primary'
                             htmlType='submit'
-                            className='login-form-button'
+                            className='forgot-password-form-button'
                             style={{ display: 'block' }}
                           >
-                            Login
+                            Submit
                           </Button>
-                          Or <Link to='/register'>register now!</Link>
                         </Form.Item>
                       </Card>
                     </div>
                   </FForm>
                 </div>
               </Col>
-              <Col span={1} />
+              <Col span={2} />
             </Row>
           </Layout.Content>
           <div className='main-footer'>
@@ -130,9 +102,9 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
   }
 }
 
-export const LoginView = withFormik<Props, FormValues>({
-  validationSchema: validUserSchema,
-  mapPropsToValues: () => ({ email: '', password: '' }),
+export const ForgotPasswordView = withFormik<Props, FormValues>({
+  validationSchema: validForgotPasswordSchema,
+  mapPropsToValues: () => ({ email: '' }),
   validateOnChange: false,
   validateOnBlur: false,
   handleSubmit: async (values, { props, setErrors, setSubmitting }) => {

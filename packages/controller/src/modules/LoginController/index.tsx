@@ -3,12 +3,13 @@ import { graphql, ChildMutateProps, useMutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { LoginMutation, LoginMutationVariables } from '../../schemaTypes'
 import { normalizeErrors } from '../../utils/normalizeErrors'
+import { NormalizeErrorMap } from '../../types/NormalizeErrorMap'
 
 interface Props {
   children: (data: {
     submit: (
       values: LoginMutationVariables,
-    ) => Promise<{ [key: string]: string } | null>
+    ) => Promise<NormalizeErrorMap | null>
   }) => JSX.Element | null
 }
 
@@ -17,16 +18,17 @@ class C extends React.PureComponent<
 > {
   submit = async (values: LoginMutationVariables) => {
     console.log('values:', values)
-    try {
-      const response = await this.props.mutate({
-        variables: values,
-      })
-    } catch (error) {
-      // if (response && response.data && response.data.login) {
-      //   // show errors
-      //   // [{path: "email": message: "inval...."}]
-      //   // {email: "inval........"}
-      return normalizeErrors(error)
+    const response = await this.props.mutate({
+      variables: values,
+    })
+
+    console.log('response:', response)
+
+    if (response && response.data && response.data.login) {
+      // show errors
+      // [{path: "email": message: "inval...."}]
+      // {email: "inval........"}
+      return normalizeErrors(response.data.login)
     }
     return null
   }
@@ -50,3 +52,5 @@ export const LoginController = graphql<
   LoginMutation,
   LoginMutationVariables
 >(loginMutation)(C as any)
+
+// wrapper that returns a child that consumes a function

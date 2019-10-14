@@ -1,1 +1,44 @@
 @import '~antd/dist/antd.css';
+
+.ant-layout {
+  background: #fff;
+}
+
+.ant-layout-header {
+  background: #fff;
+}
+
+.ant-layout-footer {
+  background: #fff;
+}
+
+.main-carousel {
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+
+.main-carousel .slick-slide {
+  text-align: center;
+  height: 400px;
+  line-height: 400px;
+  background: #364d79;
+  overflow: hidden;
+}
+
+.main-carousel .slick-slide h3 {
+  color: #fff;
+}
+
+.main-form {
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+
+.main-footer {
+  margin-top: 100px;
+  height: 400px;
+}
+
+.login-form-button {
+  width: 380px;
+}
