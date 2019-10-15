@@ -1,4 +1,5 @@
 import mongodb from 'mongodb'
+import { Prisma } from './airbnb-service/generated/prisma-client'
 
 const MongoClient = mongodb.MongoClient
 const mongoDbURL =
@@ -28,4 +29,6 @@ const getMongo = () => {
   return _client
 }
 
-export const db = { initMongo, getMongo }
+const prisma = new Prisma({ endpoint: 'http://localhost:4466/airbnb/alpha' })
+
+export const db = { initMongo, getMongo, prisma }

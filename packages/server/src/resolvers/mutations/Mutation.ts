@@ -23,21 +23,15 @@ export const Mutation: MutationResolvers.Type = {
     const isValidUser = validUserSchema.isValidSync({ email, password })
     if (!isValidUser) throw new Error(INVALID_USER_CREDENTIALS)
 
-    const response = await db
-      .getMongo()
-      .db()
-      .collection('USER')
-      .findOne({ email, password })
+    const user = await db.prisma.user({ email })
 
-    if (!response) {
+    if (!user || user.password !== password) {
       return {
         me: null,
         token: null,
         errors: [{ path: 'password', message: LOGIN_USER_NOT_FOUND }],
       }
     }
-
-    console.log('🚀 db.response:', JSON.stringify(response, null, 2))
 
     return {
       me: { email },
@@ -54,16 +48,10 @@ export const Mutation: MutationResolvers.Type = {
     const isValidUser = validUserSchema.isValidSync({ email, password })
     if (!isValidUser) throw new Error(INVALID_USER_CREDENTIALS)
 
-    const response = await db
-      .getMongo()
-      .db()
-      .collection('USER')
-      .insertOne({ email, password })
-
-    console.log('🚀 db.response:', JSON.stringify(response, null, 2))
+    const user = await db.prisma.createUser({ email, password })
 
     return {
-      me: { email },
+      me: { email: user.email },
       token: generateToken({ email }),
       errors: [],
     }

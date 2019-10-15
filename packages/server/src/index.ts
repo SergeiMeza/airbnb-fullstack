@@ -3,8 +3,8 @@ import ResponseTime from 'response-time'
 
 import { db } from './db'
 import { redis } from './redis'
-
 import { GraphQLServer } from 'graphql-yoga'
+
 import { resolvers } from './resolvers'
 import {
   ContextParameters,
