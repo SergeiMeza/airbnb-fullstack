@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs'
 import { MutationResolvers } from '../../graphqlgen/generated/graphqlgen'
 import {
   RESOLVER_NOT_IMPLEMENTED,
@@ -25,7 +26,16 @@ export const Mutation: MutationResolvers.Type = {
 
     const user = await db.prisma.user({ email })
 
-    if (!user || user.password !== password) {
+    if (!user) {
+      return {
+        me: null,
+        token: null,
+        errors: [{ path: 'password', message: LOGIN_USER_NOT_FOUND }],
+      }
+    }
+    const isValidPassword = await bcrypt.compare(password, user.password)
+
+    if (!isValidPassword) {
       return {
         me: null,
         token: null,
@@ -48,7 +58,13 @@ export const Mutation: MutationResolvers.Type = {
     const isValidUser = validUserSchema.isValidSync({ email, password })
     if (!isValidUser) throw new Error(INVALID_USER_CREDENTIALS)
 
-    const user = await db.prisma.createUser({ email, password })
+    const salt = await bcrypt.genSalt(10)
+    const encryptedPassword = await bcrypt.hash(password, salt)
+
+    const user = await db.prisma.createUser({
+      email,
+      password: encryptedPassword,
+    })
 
     return {
       me: { email: user.email },
