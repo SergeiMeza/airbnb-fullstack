@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { RegisterConnector } from '../modules/register/RegisterConnector'
 import { LoginConnector } from '../modules/login/LoginConnector'
 import { ForgotPasswordConnector } from '../modules/forgotPassword/ForgotPasswordConnector'
@@ -28,6 +28,8 @@ export const Routes = () => (
         component={ForgotPasswordConnector}
       />
       <AuthRoute path='/create-listing' component={DummyComponent} />
+      <Route path='/' render={() => <Redirect to='/register' />} />
+      <Route path='/*' render={() => <Redirect to='/register' />} />
     </Switch>
   </BrowserRouter>
 )
