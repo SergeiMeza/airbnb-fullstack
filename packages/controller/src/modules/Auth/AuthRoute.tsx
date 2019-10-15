@@ -47,3 +47,5 @@ class C extends React.PureComponent<ChildProps<Props, MeQuery>> {
 }
 
 export const AuthRoute = graphql<Props, MeQuery>(ME_QUERY)(C)
+
+// REACT HOC

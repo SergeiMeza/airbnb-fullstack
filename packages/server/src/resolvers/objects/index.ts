@@ -1,2 +1,4 @@
-export * from './Error'
-export * from './User'
+import { AuthenticationError } from './AuthenticationError'
+import { User } from './User'
+
+export default { AuthenticationError, User }

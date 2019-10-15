@@ -1,20 +1,36 @@
+type User {
+  email: String!
+}
+
+type AuthenticationError {
+  path: String!
+  message: String!
+}
+
 type Query {
   me: User
 }
 
 type Mutation {
+  register(email: String!, password: String!): RegisterResult!
+  login(email: String!, password: String!): LoginResult!
   sendForgotPasswordEmail(email: String!): Boolean
-  forgotPasswordChange: [Error!]
-  login(email: String!, password: String!): [Error!]
+  forgotPasswordChange: [AuthenticationError!]
   logout: Boolean
-  register(email: String!, password: String!): [Error!]
 }
 
-type User {
-  email: String!
+type RegisterResult {
+  me: User
+  token: String
+  errors: [AuthenticationError!]
 }
 
-type Error {
-  path: String!
-  message: String!
+type LoginResult {
+  me: User
+  token: String
+  errors: [AuthenticationError!]
+}
+
+type ForgotPasswordChangeResult {
+  errors: [AuthenticationError!]
 }

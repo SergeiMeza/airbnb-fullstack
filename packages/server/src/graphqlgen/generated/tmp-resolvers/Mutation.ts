@@ -5,19 +5,19 @@ import { MutationResolvers } from "../graphqlgen";
 
 export const Mutation: MutationResolvers.Type = {
   ...MutationResolvers.defaultResolvers,
+  register: (parent, args, ctx) => {
+    throw new Error("Resolver not implemented");
+  },
+  login: (parent, args, ctx) => {
+    throw new Error("Resolver not implemented");
+  },
   sendForgotPasswordEmail: (parent, args, ctx) => {
     throw new Error("Resolver not implemented");
   },
   forgotPasswordChange: (parent, args, ctx) => {
     throw new Error("Resolver not implemented");
   },
-  login: (parent, args, ctx) => {
-    throw new Error("Resolver not implemented");
-  },
   logout: (parent, args, ctx) => {
-    throw new Error("Resolver not implemented");
-  },
-  register: (parent, args, ctx) => {
     throw new Error("Resolver not implemented");
   }
 };

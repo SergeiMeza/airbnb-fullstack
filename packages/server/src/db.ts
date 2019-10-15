@@ -1,4 +1,4 @@
-import * as mongodb from 'mongodb'
+import mongodb from 'mongodb'
 
 const MongoClient = mongodb.MongoClient
 const mongoDbURL =

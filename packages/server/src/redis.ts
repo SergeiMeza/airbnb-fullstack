@@ -1,4 +1,4 @@
-import * as Redis from 'ioredis'
+import Redis from 'ioredis'
 
 export const redis = new Redis(
   process.env.NODE_ENV === 'dev' ? 6379 : undefined,

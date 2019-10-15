@@ -8,8 +8,14 @@ import { NormalizeErrorMap } from '../../types/NormalizeErrorMap'
 const REGISTER_MUTATION = gql`
   mutation RegisterMutation($email: String!, $password: String!) {
     register(email: $email, password: $password) {
-      path
-      message
+      me {
+        email
+      }
+      token
+      errors {
+        path
+        message
+      }
     }
   }
 `

@@ -7,12 +7,12 @@
 // ====================================================
 
 export interface MeQuery_me {
-  __typename: "User";
-  email: string;
+  __typename: 'User'
+  email: string
 }
 
 export interface MeQuery {
-  me: MeQuery_me | null;
+  me: MeQuery_me | null
 }
 
 /* tslint:disable */
@@ -24,11 +24,11 @@ export interface MeQuery {
 // ====================================================
 
 export interface SendForgotPasswordMutation {
-  sendForgotPasswordEmail: boolean | null;
+  sendForgotPasswordEmail: boolean | null
 }
 
 export interface SendForgotPasswordMutationVariables {
-  email: string;
+  email: string
 }
 
 /* tslint:disable */
@@ -39,19 +39,31 @@ export interface SendForgotPasswordMutationVariables {
 // GraphQL mutation operation: LoginMutation
 // ====================================================
 
+export interface LoginMutation_login_me {
+  __typename: 'User'
+  email: string
+}
+
+export interface LoginMutation_login_errors {
+  __typename: 'AuthenticationError'
+  path: string
+  message: string
+}
+
 export interface LoginMutation_login {
-  __typename: "Error";
-  path: string;
-  message: string;
+  __typename: 'LoginResult'
+  me: LoginMutation_login_me | null
+  token: string | null
+  errors: LoginMutation_login_errors[] | null
 }
 
 export interface LoginMutation {
-  login: LoginMutation_login[] | null;
+  login: LoginMutation_login
 }
 
 export interface LoginMutationVariables {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
 /* tslint:disable */
@@ -62,19 +74,31 @@ export interface LoginMutationVariables {
 // GraphQL mutation operation: RegisterMutation
 // ====================================================
 
+export interface RegisterMutation_register_me {
+  __typename: 'User'
+  email: string
+}
+
+export interface RegisterMutation_register_errors {
+  __typename: 'AuthenticationError'
+  path: string
+  message: string
+}
+
 export interface RegisterMutation_register {
-  __typename: "Error";
-  path: string;
-  message: string;
+  __typename: 'RegisterResult'
+  me: RegisterMutation_register_me | null
+  token: string | null
+  errors: RegisterMutation_register_errors[] | null
 }
 
 export interface RegisterMutation {
-  register: RegisterMutation_register[] | null;
+  register: RegisterMutation_register
 }
 
 export interface RegisterMutationVariables {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
 /* tslint:disable */

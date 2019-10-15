@@ -17,7 +17,7 @@ import { withFormik, FormikProps, Field, Form as FForm } from 'formik'
 import { validUserSchema } from '@airbnb-fullstack/common'
 import { InputField } from '../../shared/InputField'
 import { Link } from 'react-router-dom'
-import { NormalizeErrorMap } from '@airbnb-fullstack/controller'
+import { NormalizeErrorMap, LoginResult } from '@airbnb-fullstack/controller'
 
 interface FormValues {
   email: string
@@ -26,7 +26,7 @@ interface FormValues {
 
 interface Props {
   onFinish: () => void
-  submit: (values: FormValues) => Promise<NormalizeErrorMap | null>
+  submit: (values: FormValues) => Promise<LoginResult>
 }
 
 class C extends React.PureComponent<FormikProps<FormValues> & Props> {
@@ -139,10 +139,12 @@ export const LoginView = withFormik<Props, FormValues>({
   validateOnChange: false,
   validateOnBlur: false,
   handleSubmit: async (values, { props, setErrors, setSubmitting }) => {
-    const errors = await props.submit(values)
-    if (errors) {
-      setErrors(errors)
+    const result = await props.submit(values)
+    if (result.errors) {
+      setErrors(result.errors)
     } else {
+      const { me, token } = result
+      // TODO: save session
       props.onFinish()
     }
   },

@@ -1,5 +1,5 @@
-import * as Express from 'express'
-import * as ResponseTime from 'response-time'
+import Express from 'express'
+import ResponseTime from 'response-time'
 
 import { db } from './db'
 import { redis } from './redis'
