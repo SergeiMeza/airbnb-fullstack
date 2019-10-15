@@ -6,7 +6,7 @@ echo "================================"
 echo "AUTOCOMMIT"
 
 git add .
-git commit -m "autocommit"
+git commit -m "autocommit: $1"
 git push
 
 echo "================================"
