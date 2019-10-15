@@ -1,0 +1,154 @@
+type User {
+  #
+  # COMMON FIELDS TO ALL USERS
+  #
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  firstName: String
+  lastName: String
+  email: String! @unique
+  phone: String
+  isHost: Boolean! @default(value: false)
+  isSuperHost: Boolean! @default(value: false)
+  currentUserType: UserType! @default(value: GUEST)
+  userLocation: UserLocation @relation(name: "USER_LOCATION")
+  profilePicture: Picture
+
+  #
+  # FIELDS OF GUEST USERS
+  #
+
+  # bookings: [Booking!]! @relation(link: INLINE)
+  # paymentAccount: [paymentAccount!]!
+  # guestBio: String! @default(value: "")
+
+  #
+  # FIELDS OF HOST USERS
+  #
+
+  # responseRate: Float
+  # responseTime: Int
+  # ownedPlaces: [Place!]! @relation(link: INLINE)
+  # hostingExperiences: [Experience!]! @relation(link: INLINE)
+  # hostBio: String! @default(value: "")
+  # bankAccount: BankAccount
+}
+
+enum UserType {
+  GUEST
+  HOST
+}
+
+type UserLocation @embedded {
+  type: String! @default(value: "Point")
+  coordinates: [Float!]! #longitude, latitude
+  latitude: Float!
+  longitude: Float!
+}
+
+type Picture {
+  url: String!
+}
+
+# type Booking {
+#   id: ID! @unique
+#   createdAt: DateTime! @createdAt
+#   updatedAt: DateTime! @updatedAt
+#   bookee: User!
+#   place: Place!
+#   startDate: DateTime!
+#   endDate: DateTime!
+#   payment: Payment!
+# }
+
+# type Payment {
+#   id: ID! @unique
+#   createdAt: DateTime!
+#   serviceFee: Float!
+#   placePrice: Float!
+#   totalPrice: Float!
+#   booking: Booking!
+#   paymentMethod: PaymentAccount!
+# }
+
+# type PaymentAccount {
+#   id: ID! @unique
+#   createdAt: DateTime!
+#   type: PAYMENT_PROVIDER
+#   user: User!
+#   payments: [Payment!]!
+#   paypal: PaypalInformation
+#   creditcard: CreditCardInformation
+# }
+
+# type PaypalInformation {
+#   id: ID! @unique
+#   createdAt: DateTime!
+#   email: String!
+#   paymentAccount: PaymentAccount!
+# }
+
+# type Place {
+#   id: ID! @id
+#   createdAt: DateTime! @createdAt
+#   updatedAt: DateTime! @updatedAt
+#   name: String!
+#   size: PlaceSize
+#   shortDescription: String!
+#   description: String!
+#   slug: String!
+#   maxGuests: Int!
+#   numBedrooms: Int!
+#   numBeds: Int!
+#   numBaths: Int!
+#   reviews: [Review!]!
+#   amenities: Amenities!
+#   host: User!
+#   pricing: Pricing!
+#   location: PlaceLocation!
+#   views: Views!
+#   guestRequirements: GuestRequirements
+#   policies: Policies
+#   houseRules: HouseRules
+#   bookings: [Booking!]!
+#   pictures: [Picture!]!
+#   popularity: Int!
+# }
+
+# enum PlaceSize {
+#   ENTIRE_HOUSE
+#   ENTIRE_APARTMENT
+#   ENTIRE_EARTH_HOUSE
+#   ENTIRE_CABIN
+#   ENTIRE_VILLA
+#   ENTIRE_PLACE
+#   ENTIRE_BOAT
+#   PRIVATE_ROOM
+# }
+
+# type PlaceLocation {
+#   id: ID! @id
+#   createdAt: DateTime! @createdAt
+#   updatedAt: DateTime! @updatedAt
+#   type: String! @default(value: "Point")
+#   coordinates: [Float!]! #longitude, latitude
+#   latitude: Float!
+#   longitude: Float!
+#   neighbourHood: NeighbourHood @relation(link: INLINE)
+# }
+
+# type NeighbourHood {
+#   id: ID! @id
+#   locations: [PlaceLocation!]!
+#   name: String!
+#   slug: String!
+#   homePreview: Picture
+#   city: City!
+#   featured: Boolean!
+#   popularity: Int!
+# }
+
+# type Views @embedded {
+#   lastWeek: Int!
+# }

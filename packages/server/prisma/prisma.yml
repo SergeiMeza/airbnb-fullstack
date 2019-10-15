@@ -1,0 +1,14 @@
+datamodel:
+  - database/user.prisma
+endpoint: ${env:PRISMA_ENDPOINT}
+databaseType: document
+
+generate:
+  - generator: typescript-client
+    output: ../../server/src/airbnb-service/generated/prisma-client/
+  - generator: graphql-schema
+    output: ../../server/src/airbnb-service/generated/airbnb-prisma.graphql
+
+hooks:
+  post-deploy:
+    - yarn graphql codegen

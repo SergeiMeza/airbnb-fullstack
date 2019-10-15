@@ -1,0 +1,13 @@
+projects:
+  airbnb-prisma:
+    schemaPath: ../../server/src/airbnb-service/generated/airbnb-prisma.graphql
+    includes: [
+      "user.prisma",
+    ]
+    extensions:
+      prisma: prisma.yml
+      codegen:
+      - generator: prisma-binding
+        language: typescript
+        output:
+          binding: ../../server/src/airbnb-service/generated/airbnb-prisma.ts
