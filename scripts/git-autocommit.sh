@@ -1,14 +1,15 @@
-
-
-echo "================================"
-echo "================================"
 echo "================================"
 echo "AUTOCOMMIT"
 
 git add .
-git commit -m "autocommit: $1"
+
+if [ $# -eq 0 ]
+  then
+    git commit -m "autocommit"
+  else
+    git commit -m "autocommit: $1"
+fi
+
 git push
 
-echo "================================"
-echo "================================"
 echo "================================"
