@@ -45,8 +45,7 @@ export namespace QueryResolvers {
 
 export namespace UserResolvers {
   export const defaultResolvers = {
-    email: (parent: User) => parent.email,
-    password: (parent: User) => parent.password
+    email: (parent: User) => parent.email
   };
 
   export type EmailResolver =
@@ -66,42 +65,8 @@ export namespace UserResolvers {
         ) => string | Promise<string>;
       };
 
-  export type PasswordResolver =
-    | ((
-        parent: User,
-        args: {},
-        ctx: Context,
-        info: GraphQLResolveInfo
-      ) => string | Promise<string>)
-    | {
-        fragment: string;
-        resolve: (
-          parent: User,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string | Promise<string>;
-      };
-
   export interface Type {
     email:
-      | ((
-          parent: User,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string | Promise<string>)
-      | {
-          fragment: string;
-          resolve: (
-            parent: User,
-            args: {},
-            ctx: Context,
-            info: GraphQLResolveInfo
-          ) => string | Promise<string>;
-        };
-
-    password:
       | ((
           parent: User,
           args: {},

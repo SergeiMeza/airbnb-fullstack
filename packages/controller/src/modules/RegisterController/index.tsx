@@ -1,17 +1,9 @@
 import React from 'react'
-import { graphql, ChildMutateProps, useMutation } from 'react-apollo'
+import { useMutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { RegisterMutation, RegisterMutationVariables } from '../../schemaTypes'
 import { NormalizeErrorMap } from '../../types/NormalizeErrorMap'
-import { normalizeErrors } from '../../utils/normalizeErrors'
-
-interface Props {
-  children: (data: {
-    submit: (
-      values: RegisterMutationVariables,
-    ) => Promise<NormalizeErrorMap | null>
-  }) => JSX.Element | null
-}
+// import { normalizeErrors } from '../../utils/normalizeErrors'
 
 const REGISTER_MUTATION = gql`
   mutation RegisterMutation($email: String!, $password: String!) {
@@ -22,7 +14,15 @@ const REGISTER_MUTATION = gql`
   }
 `
 
-export function RegisterControllerHooks(props: Props) {
+interface Props {
+  children: (data: {
+    submit: (
+      values: RegisterMutationVariables,
+    ) => Promise<NormalizeErrorMap | null>
+  }) => JSX.Element | null
+}
+
+export function RegisterController(props: Props) {
   const [registerMutation, { data, loading, error }] = useMutation<
     RegisterMutation,
     RegisterMutationVariables
@@ -32,7 +32,9 @@ export function RegisterControllerHooks(props: Props) {
   // if (error) return <p>error: {error.message}</p>
 
   const submit = async (values: RegisterMutationVariables) => {
-    const result = await registerMutation({ variables: values })
+    console.log('🚀 values:', values)
+    const response = await registerMutation({ variables: values })
+    console.log('🚀 response:', response)
     return null
   }
 

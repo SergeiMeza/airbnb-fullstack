@@ -1,5 +1,5 @@
 import React from 'react'
-import { RegisterControllerHooks } from '@airbnb-fullstack/controller'
+import { RegisterController } from '@airbnb-fullstack/controller'
 import { RegisterView } from './ui/RegisterView'
 
 // normal pattern
@@ -13,9 +13,9 @@ export class RegisterConnector extends React.PureComponent {
   render() {
     return (
       <React.Fragment>
-        <RegisterControllerHooks>
+        <RegisterController>
           {({ submit }) => <RegisterView submit={submit} />}
-        </RegisterControllerHooks>
+        </RegisterController>
       </React.Fragment>
     )
   }

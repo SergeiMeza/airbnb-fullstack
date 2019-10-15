@@ -25,6 +25,7 @@ interface FormValues {
 }
 
 interface Props {
+  onFinish: () => void
   submit: (values: FormValues) => Promise<NormalizeErrorMap | null>
 }
 
@@ -42,7 +43,9 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
               <Menu.Item key='1'>nav 1</Menu.Item>
               <Menu.Item key='2'>nav 2</Menu.Item>
               <Menu.Item key='3'>nav 3</Menu.Item>
-              <Avatar icon='user' />
+              <Menu.Item key='4'>
+                <Avatar icon='user' />
+              </Menu.Item>
             </Menu>
           </Layout.Header>
           <Layout.Content>
@@ -100,7 +103,7 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
                           component={InputField}
                         />
                         <Form.Item>
-                          <Link to='/forgot'>Forgot password?</Link>
+                          <Link to='/forgot-password'>Forgot password?</Link>
                           <Button
                             type='primary'
                             htmlType='submit'
@@ -139,6 +142,8 @@ export const LoginView = withFormik<Props, FormValues>({
     const errors = await props.submit(values)
     if (errors) {
       setErrors(errors)
+    } else {
+      props.onFinish()
     }
   },
 })(C)

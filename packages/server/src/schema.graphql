@@ -12,7 +12,6 @@ type Mutation {
 
 type User {
   email: String!
-  password: String!
 }
 
 type Error {
