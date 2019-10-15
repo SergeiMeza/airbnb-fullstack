@@ -17,7 +17,7 @@ import { withFormik, FormikProps, Field, Form as FForm } from 'formik'
 import { validUserSchema } from '@airbnb-fullstack/common'
 import { InputField } from '../../shared/InputField'
 import { Link } from 'react-router-dom'
-import { NormalizeErrorMap, LoginResult } from '@airbnb-fullstack/controller'
+import { LoginResult } from '@airbnb-fullstack/controller'
 
 interface FormValues {
   email: string

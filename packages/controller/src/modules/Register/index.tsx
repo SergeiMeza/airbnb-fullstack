@@ -1,9 +1,16 @@
 import React from 'react'
-import { useMutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { useMutation } from 'react-apollo'
 import { RegisterMutation, RegisterMutationVariables } from '../../schemaTypes'
+import { normalizeErrors } from '../../utils/normalizeErrors'
 import { NormalizeErrorMap } from '../../types/NormalizeErrorMap'
-// import { normalizeErrors } from '../../utils/normalizeErrors'
+import { LoginResult } from '../Login'
+
+export interface RegisterResult {
+  me: { email: string } | null
+  token: string | null
+  errors: NormalizeErrorMap | null
+}
 
 const REGISTER_MUTATION = gql`
   mutation RegisterMutation($email: String!, $password: String!) {
@@ -22,9 +29,7 @@ const REGISTER_MUTATION = gql`
 
 interface Props {
   children: (data: {
-    submit: (
-      values: RegisterMutationVariables,
-    ) => Promise<NormalizeErrorMap | null>
+    submit: (values: RegisterMutationVariables) => Promise<LoginResult>
   }) => JSX.Element | null
 }
 
@@ -34,14 +39,32 @@ export function RegisterController(props: Props) {
     RegisterMutationVariables
   >(REGISTER_MUTATION)
 
-  // if (loading) return <p>loading</p>
-  // if (error) return <p>error: {error.message}</p>
-
   const submit = async (values: RegisterMutationVariables) => {
-    console.log('🚀 values:', values)
     const response = await registerMutation({ variables: values })
+
+    console.log('🚀 values:', values)
     console.log('🚀 response:', response)
-    return null
+
+    if (
+      response &&
+      response.data &&
+      response.data.register &&
+      response.data.register.errors
+    ) {
+      const errors = normalizeErrors(response.data.register.errors)
+      return {
+        me: null,
+        token: null,
+        errors,
+      }
+    }
+
+    const register = response.data!.register!
+    return {
+      me: register.me,
+      token: register.token,
+      errors: null,
+    }
   }
 
   return props.children({ submit })

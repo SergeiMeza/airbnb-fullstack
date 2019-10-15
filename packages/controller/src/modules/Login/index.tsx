@@ -1,6 +1,6 @@
 import React from 'react'
-import { useMutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { useMutation } from 'react-apollo'
 import { LoginMutation, LoginMutationVariables } from '../../schemaTypes'
 import { normalizeErrors } from '../../utils/normalizeErrors'
 import { NormalizeErrorMap } from '../../types/NormalizeErrorMap'

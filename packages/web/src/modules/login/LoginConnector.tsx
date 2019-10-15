@@ -1,7 +1,7 @@
 import React from 'react'
+import { RouteComponentProps } from 'react-router'
 import { LoginController } from '@airbnb-fullstack/controller'
 import { LoginView } from './ui/LoginView'
-import { RouteComponentProps } from 'react-router'
 
 export class LoginConnector extends React.PureComponent<
   RouteComponentProps<{}>
