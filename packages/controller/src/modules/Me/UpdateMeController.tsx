@@ -6,6 +6,9 @@ import { UpdateMeMutation, UpdateMeMutationVariables } from '../../schemaTypes'
 export interface UpdateMeResult {
   me: {
     email: string
+    firstName: string | null
+    lastName: string | null
+    media: any
   }
   token: string
 }
@@ -41,9 +44,7 @@ const UPDATE_ME_MUTATION = gql`
 
 interface Props {
   children: (data: {
-    submit: (
-      values: UpdateMeMutationVariables,
-    ) => Promise<UpdateMeResult | null>
+    submit: (values: UpdateMeMutationVariables) => Promise<UpdateMeResult>
   }) => JSX.Element | null
 }
 
@@ -56,10 +57,16 @@ export function UpdateMeController(props: Props) {
   const submit = async (values: UpdateMeMutationVariables) => {
     const response = await updateMeMutation({ variables: values })
 
-    console.log('🚀 values:', values)
-    console.log('🚀 response:', response)
-
-    return null
+    if (response && response.data && response.data.updateMe)
+      return {
+        me: {
+          ...response.data.updateMe.me,
+        },
+        token: response.data.updateMe.token,
+      }
+    else {
+      throw Error('server error')
+    }
   }
 
   return props.children({ submit })

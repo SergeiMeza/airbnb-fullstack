@@ -1,146 +1,216 @@
 import React from 'react'
-import {
-  Layout,
-  Card,
-  Form,
-  Button,
-  Typography,
-  Menu,
-  Row,
-  Col,
-  Divider,
-} from 'antd'
-import { withFormik, FormikProps, Field, Form as FForm } from 'formik'
+import { Layout, Card, Typography, Row, Col, Divider } from 'antd'
+import { Form, Input, Cascader, SubmitButton } from '@jbuschke/formik-antd'
+import { Formik } from 'formik'
 // import { validUserSchema } from '@airbnb-fullstack/common'
-import { InputField } from '../../shared/InputField'
+import { AppHeader, AppFooter } from '../../shared'
+import { UpdateMeMutationVariables } from '@airbnb-fullstack/controller'
+
 // import { Link } from 'react-router-dom'
 // import { RegisterResult } from '@airbnb-fullstack/controller'
 
 export interface FormValues {
   firstName: string
   lastName: string
-  birthMonth: string
-  birthDay: string
-  birthYear: string
+  birthdayMonth: string
+  birthdayDay: string
+  birthdayYear: string
 }
 
 interface Props {
   onFinish: () => void
   // submit: (values: FormValues) => Promise<RegisterResult>
-  submit: (values: FormValues) => Promise<any>
+  submit: (values: UpdateMeMutationVariables) => Promise<any>
 }
 
-class C extends React.PureComponent<FormikProps<FormValues> & Props> {
+export class UpdateMeView extends React.PureComponent<Props> {
+  monthOptions = [
+    {
+      value: '01',
+      label: 'January',
+    },
+    {
+      value: '02',
+      label: 'February',
+    },
+    {
+      value: '03',
+      label: 'March',
+    },
+    {
+      value: '04',
+      label: 'April',
+    },
+    {
+      value: '05',
+      label: 'May',
+    },
+    {
+      value: '06',
+      label: 'June',
+    },
+    {
+      value: '07',
+      label: 'July',
+    },
+    {
+      value: '08',
+      label: 'August',
+    },
+    {
+      value: '09',
+      label: 'September',
+    },
+    {
+      value: '10',
+      label: 'October',
+    },
+    {
+      value: '11',
+      label: 'November',
+    },
+    {
+      value: '12',
+      label: 'December',
+    },
+  ]
+  dateOptions = Array.apply(null, { length: 31 } as any).map((_, index) => ({
+    value: `${index + 1}`,
+    label: `${index + 1}`,
+  }))
+  yearOptions = Array.apply(null, { length: 120 } as any).map((_, index) => ({
+    value: `${2019 - index}`,
+    label: `${2019 - index}`,
+  }))
   render() {
+    let initialValues = {
+      firstName: '',
+      lastName: '',
+      birthdayMonth: Array<string>(),
+      birthdayDay: Array<string>(),
+      birthdayYear: Array<string>(),
+    }
+    const _me = localStorage.getItem('me')
+
+    if (_me) {
+      try {
+        const __me = JSON.parse(_me)
+        if (__me) {
+          initialValues.firstName = __me.firstName
+          initialValues.lastName = __me.lastName
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
     return (
       <div>
         <Layout>
-          <Layout.Header>
-            <Menu
-              theme='light'
-              mode='horizontal'
-              style={{ lineHeight: '64px' }}
-            >
-              <Menu.Item key='1'>nav 1</Menu.Item>
-              <Menu.Item key='2'>nav 2</Menu.Item>
-              <Menu.Item key='3'>nav 3</Menu.Item>
-            </Menu>
-          </Layout.Header>
+          <AppHeader />
           <Layout.Content>
             <Row>
               <Col span={1} />
               <Col span={22}>
                 <div className='main-form'>
-                  <FForm style={{ display: 'flex' }}>
-                    <div style={{ margin: 'auto' }}>
-                      <Card bordered={false}>
-                        <Typography>
-                          <Typography.Title level={2}>
-                            My Profile
-                          </Typography.Title>
-                        </Typography>
-                        <Divider />
-                        <Field
-                          name='firstname'
-                          placeholder='First Name'
-                          component={InputField}
-                        />
-                        <Field
-                          name='lastname'
-                          placeholder='Last Name'
-                          component={InputField}
-                        />
-                        <Typography>
-                          <Typography.Title level={3}>
-                            Birthday
-                          </Typography.Title>
-                          <Typography.Paragraph>
-                            To sign up, you need to be at least 18.
-                          </Typography.Paragraph>
-                        </Typography>
-                        <Field
-                          name='birthdaymonth'
-                          placeholder='Month'
-                          component={InputField}
-                        />
-                        <Field
-                          name='birthdayday'
-                          placeholder='Day'
-                          component={InputField}
-                        />
-                        <Field
-                          name='birthdayyear'
-                          placeholder='Year'
-                          component={InputField}
-                        />
-                        <Form.Item>
-                          <Button
+                  <Formik
+                    initialValues={initialValues}
+                    onSubmit={async values => {
+                      const isValidDate =
+                        values.birthdayDay.length > 0 &&
+                        values.birthdayMonth.length > 0 &&
+                        values.birthdayYear.length > 0
+
+                      const birthdate = isValidDate
+                        ? new Date(
+                            `${values.birthdayMonth[0]}-${values.birthdayDay}-${values.birthdayYear}`,
+                          )
+                        : null
+
+                      const result = await this.props.submit({
+                        birthdate,
+                        firstName: values.firstName,
+                        lastName: values.lastName,
+                      })
+
+                      console.log('🚀 result:', result)
+                      const { me, token } = result
+                      if (result && me !== null && token !== null) {
+                        localStorage.setItem('token', token)
+                        localStorage.setItem('me', JSON.stringify(me))
+                        this.props.onFinish()
+                      }
+                    }}
+                  >
+                    <Form style={{ display: 'flex' }}>
+                      <div style={{ margin: 'auto' }}>
+                        <Card bordered={false} style={{ width: 400 }}>
+                          <Typography>
+                            <Typography.Title level={2}>
+                              My Profile
+                            </Typography.Title>
+                          </Typography>
+                          <Divider />
+                          <Form.Item name='firstName'>
+                            <Input name='firstName' placeholder='First Name' />
+                          </Form.Item>
+                          <Form.Item name='lastName'>
+                            <Input name='lastName' placeholder='Last Name' />
+                          </Form.Item>
+                          <Typography>
+                            <Typography.Title level={3}>
+                              Birthday
+                            </Typography.Title>
+                            <Typography.Paragraph>
+                              To sign up, you need to be at least 18.
+                            </Typography.Paragraph>
+                          </Typography>
+                          <div style={{ display: 'flex' }}>
+                            <Form.Item
+                              name='birthdayMonth'
+                              style={{ paddingRight: '10px' }}
+                            >
+                              <Cascader
+                                name='birthdayMonth'
+                                placeholder='Month'
+                                options={this.monthOptions}
+                              />
+                            </Form.Item>
+                            <Form.Item
+                              name='birthdayDay'
+                              style={{ paddingRight: '10px' }}
+                            >
+                              <Cascader
+                                name='birthdayDay'
+                                placeholder='Day'
+                                options={this.dateOptions}
+                              />
+                            </Form.Item>
+                            <Form.Item name='birthdayYear'>
+                              <Cascader
+                                name='birthdayYear'
+                                placeholder='Year'
+                                options={this.yearOptions}
+                              />
+                            </Form.Item>
+                          </div>
+                          <SubmitButton
                             type='primary'
-                            htmlType='submit'
                             style={{ display: 'block' }}
                           >
-                            Begin!
-                          </Button>
-                        </Form.Item>
-                      </Card>
-                    </div>
-                  </FForm>
+                            Update
+                          </SubmitButton>
+                        </Card>
+                      </div>
+                    </Form>
+                  </Formik>
                 </div>
               </Col>
               <Col span={1} />
             </Row>
           </Layout.Content>
-          <div className='main-footer'>
-            <Layout.Footer>
-              <Divider />
-            </Layout.Footer>
-          </div>
+          <AppFooter />
         </Layout>
       </div>
     )
   }
 }
-
-export const UpdateMeView = withFormik<Props, FormValues>({
-  // validationSchema: validUserSchema,
-  mapPropsToValues: () => ({
-    firstName: '',
-    lastName: '',
-    birthMonth: '',
-    birthDay: '',
-    birthYear: '',
-  }),
-  validateOnChange: false,
-  validateOnBlur: false,
-  handleSubmit: async (values, { props, setErrors, setSubmitting }) => {
-    // const result = await props.submit(values)
-    // const { me, token } = result
-    // if (me !== null && token !== null) {
-    //   localStorage.setItem('token', token)
-    //   props.onFinish()
-    // }
-    // if (result.errors) {
-    //   setErrors(result.errors)
-    // }
-  },
-})(C)

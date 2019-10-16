@@ -6,8 +6,6 @@ import {
   Form,
   Icon,
   Button,
-  Menu,
-  Avatar,
   Row,
   Col,
   Divider,
@@ -17,6 +15,8 @@ import { validForgotPasswordSchema } from '@airbnb-fullstack/common'
 import { InputField } from '../../shared/InputField'
 // import { Link } from 'react-router-dom'
 import { NormalizeErrorMap } from '@airbnb-fullstack/controller'
+import { AppHeader } from '../../shared/AppHeader'
+import { AppFooter } from '../../shared/AppFooter'
 
 interface FormValues {
   email: string
@@ -31,18 +31,7 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
     return (
       <div>
         <Layout>
-          <Layout.Header>
-            <Menu
-              theme='light'
-              mode='horizontal'
-              style={{ lineHeight: '64px' }}
-            >
-              <Menu.Item key='1'>nav 1</Menu.Item>
-              <Menu.Item key='2'>nav 2</Menu.Item>
-              <Menu.Item key='3'>nav 3</Menu.Item>
-              <Avatar icon='user' />
-            </Menu>
-          </Layout.Header>
+          <AppHeader />
           <Layout.Content>
             <Row>
               <Col span={2} />
@@ -91,11 +80,7 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
               <Col span={2} />
             </Row>
           </Layout.Content>
-          <div className='main-footer'>
-            <Layout.Footer>
-              <Divider />
-            </Layout.Footer>
-          </div>
+          <AppFooter />
         </Layout>
       </div>
     )

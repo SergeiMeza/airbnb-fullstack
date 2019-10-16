@@ -1,7 +1,7 @@
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
 import { UpdateMeController } from '@airbnb-fullstack/controller'
-import { UpdateMeView, FormValues } from './ui/UpdateMeView'
+import { UpdateMeView } from './ui/UpdateMeView'
 
 export class UpdateMeConnector extends React.PureComponent<
   RouteComponentProps<{}>
