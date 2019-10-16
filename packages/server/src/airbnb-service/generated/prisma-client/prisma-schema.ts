@@ -42,10 +42,12 @@ type PageInfo {
 
 type Picture {
   url: String!
+  mimetype: String!
 }
 
 input PictureCreateInput {
   url: String!
+  mimetype: String!
 }
 
 input PictureCreateOneInput {
@@ -54,6 +56,7 @@ input PictureCreateOneInput {
 
 input PictureUpdateDataInput {
   url: String
+  mimetype: String
 }
 
 input PictureUpdateOneInput {
@@ -84,6 +87,20 @@ input PictureWhereInput {
   url_not_starts_with: String
   url_ends_with: String
   url_not_ends_with: String
+  mimetype: String
+  mimetype_not: String
+  mimetype_in: [String!]
+  mimetype_not_in: [String!]
+  mimetype_lt: String
+  mimetype_lte: String
+  mimetype_gt: String
+  mimetype_gte: String
+  mimetype_contains: String
+  mimetype_not_contains: String
+  mimetype_starts_with: String
+  mimetype_not_starts_with: String
+  mimetype_ends_with: String
+  mimetype_not_ends_with: String
   AND: [PictureWhereInput!]
 }
 

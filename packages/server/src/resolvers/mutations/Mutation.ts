@@ -1,3 +1,5 @@
+import { createWriteStream } from 'fs'
+import shortid from 'shortid'
 import bcrypt from 'bcryptjs'
 import { MutationResolvers } from '../../graphqlgen/generated/graphqlgen'
 import {
@@ -10,6 +12,27 @@ import {
 import { db } from '../../db'
 import { validUserSchema } from '@airbnb-fullstack/common'
 import { generateToken, verifyToken } from '../../utils/jwt'
+
+const storeUpload = async ({ stream, extension }): Promise<any> => {
+  const id = shortid.generate()
+  const path = `images/${id}.${extension}`
+
+  return new Promise((resolve, reject) =>
+    stream
+      .on('finish', () => resolve({ id, path }))
+      .pipe(createWriteStream(path))
+      .on('error', reject),
+  )
+}
+
+const processUpload = async upload => {
+  const file = await upload
+  const { createReadStream, mimetype } = await upload
+  const stream = createReadStream()
+  const extension = mimetype.split('/')[1]
+  const { id } = await storeUpload({ stream, extension })
+  return { id, mimetype, extension }
+}
 
 export const Mutation: MutationResolvers.Type = {
   ...MutationResolvers.defaultResolvers,
@@ -103,7 +126,7 @@ export const Mutation: MutationResolvers.Type = {
       const decodedUser: any = verifyToken(token)
       if (!decodedUser.u.email) throw new Error()
 
-      const updatedUser: any = await db.prisma.updateUser({
+      const updatedUser = await db.prisma.updateUser({
         where: {
           email: decodedUser.u.email,
         },
@@ -114,21 +137,29 @@ export const Mutation: MutationResolvers.Type = {
         },
       })
 
-      updatedUser.media = null
+      const _updatedUser: any = updatedUser
 
-      delete updatedUser.password
+      delete _updatedUser.password
+
+      _updatedUser.media = updatedUser.profilePicture
+        ? {
+            url: updatedUser.profilePicture!.url,
+            mimetype: updatedUser.profilePicture!.mimetype,
+          }
+        : null
 
       const updatedToken = generateToken({
         u: {
-          email: updatedUser.email,
-          firstName: updatedUser.firstName,
-          lastName: updatedUser.lastName,
-          birthdate: updatedUser.birthdate,
+          email: _updatedUser.email,
+          firstName: _updatedUser.firstName,
+          lastName: _updatedUser.lastName,
+          birthdate: _updatedUser.birthdate,
+          media: _updatedUser.media,
         },
       })
 
       return {
-        me: updatedUser,
+        me: _updatedUser,
         token: updatedToken,
       }
     } catch {
@@ -136,7 +167,59 @@ export const Mutation: MutationResolvers.Type = {
     }
   },
 
-  updateMeMedia: (parent, args, ctx) => {
-    throw new Error('Resolver not implemented')
+  updateMeMedia: async (parent, { media }, ctx) => {
+    try {
+      const authorization = ctx.request.get('x-auth-token')
+      if (!authorization) throw Error()
+      const token = authorization.replace('Bearer ', '')
+      const decodedUser: any = verifyToken(token)
+      if (!decodedUser.u.email) throw new Error()
+
+      const { extension, id, mimetype } = await processUpload(media)
+
+      const updatedUser = await db.prisma.updateUser({
+        where: {
+          email: decodedUser.u.email,
+        },
+        data: {
+          profilePicture: {
+            create: {
+              url: `${id}.${extension}`,
+              mimetype,
+            },
+          },
+        },
+      })
+
+      if (!updatedUser) throw new Error(LOGIN_USER_NOT_FOUND)
+
+      const _updatedUser: any = updatedUser
+      delete _updatedUser.password
+
+      _updatedUser.media = updatedUser.profilePicture
+        ? {
+            url: updatedUser.profilePicture!.url,
+            mimetype: updatedUser.profilePicture!.mimetype,
+          }
+        : null
+
+      const updatedToken = generateToken({
+        u: {
+          email: _updatedUser.email,
+          firstName: _updatedUser.firstName,
+          lastName: _updatedUser.lastName,
+          birthdate: _updatedUser.birthdate,
+          media: _updatedUser.media,
+        },
+      })
+
+      return {
+        me: _updatedUser,
+        token: updatedToken,
+      }
+    } catch (error) {
+      console.log('😅 error:', error)
+      throw new Error(NOT_AUTHORIZED)
+    }
   },
 }

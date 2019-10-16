@@ -17,14 +17,14 @@ interface Props {
 class C extends React.PureComponent<FormikProps<FormValues> & Props> {
   render() {
     return (
-      <div>
+      <>
         <Layout>
           <AppHeader />
           <Layout.Content>
             <Row>
               <Col span={2} />
               <Col span={20}>
-                <div className='main-form'>
+                <div style={{ paddingTop: 100, paddingBottom: 50 }}>
                   <Form style={{ display: 'flex' }}>
                     <div style={{ margin: 'auto' }}>
                       <Card bordered={false}>
@@ -69,7 +69,7 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
           </Layout.Content>
           <RegisterFooter />
         </Layout>
-      </div>
+      </>
     )
   }
 }

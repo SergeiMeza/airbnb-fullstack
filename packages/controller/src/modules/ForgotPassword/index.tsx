@@ -35,7 +35,7 @@ class C extends React.PureComponent<
   }
 }
 
-const forgotPasswordMutation = gql`
+const FORGOT_PASSWORD_MUTATION = gql`
   mutation SendForgotPasswordMutation($email: String!) {
     sendForgotPasswordEmail(email: $email)
   }
@@ -45,4 +45,4 @@ export const ForgotPasswordController = graphql<
   Props,
   SendForgotPasswordMutation,
   SendForgotPasswordMutationVariables
->(forgotPasswordMutation)(C as any)
+>(FORGOT_PASSWORD_MUTATION)(C as any)

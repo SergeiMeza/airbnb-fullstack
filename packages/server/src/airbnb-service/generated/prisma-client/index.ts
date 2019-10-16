@@ -307,6 +307,20 @@ export interface PictureWhereInput {
   url_not_starts_with?: Maybe<String>;
   url_ends_with?: Maybe<String>;
   url_not_ends_with?: Maybe<String>;
+  mimetype?: Maybe<String>;
+  mimetype_not?: Maybe<String>;
+  mimetype_in?: Maybe<String[] | String>;
+  mimetype_not_in?: Maybe<String[] | String>;
+  mimetype_lt?: Maybe<String>;
+  mimetype_lte?: Maybe<String>;
+  mimetype_gt?: Maybe<String>;
+  mimetype_gte?: Maybe<String>;
+  mimetype_contains?: Maybe<String>;
+  mimetype_not_contains?: Maybe<String>;
+  mimetype_starts_with?: Maybe<String>;
+  mimetype_not_starts_with?: Maybe<String>;
+  mimetype_ends_with?: Maybe<String>;
+  mimetype_not_ends_with?: Maybe<String>;
   AND?: Maybe<PictureWhereInput[] | PictureWhereInput>;
 }
 
@@ -346,6 +360,7 @@ export interface PictureCreateOneInput {
 
 export interface PictureCreateInput {
   url: String;
+  mimetype: String;
 }
 
 export interface UserUpdateInput {
@@ -396,6 +411,7 @@ export interface PictureUpdateOneInput {
 
 export interface PictureUpdateDataInput {
   url?: Maybe<String>;
+  mimetype?: Maybe<String>;
 }
 
 export interface PictureUpsertNestedInput {
@@ -536,22 +552,26 @@ export interface UserLocationNullablePromise
 
 export interface Picture {
   url: String;
+  mimetype: String;
 }
 
 export interface PicturePromise extends Promise<Picture>, Fragmentable {
   url: () => Promise<String>;
+  mimetype: () => Promise<String>;
 }
 
 export interface PictureSubscription
   extends Promise<AsyncIterator<Picture>>,
     Fragmentable {
   url: () => Promise<AsyncIterator<String>>;
+  mimetype: () => Promise<AsyncIterator<String>>;
 }
 
 export interface PictureNullablePromise
   extends Promise<Picture | null>,
     Fragmentable {
   url: () => Promise<String>;
+  mimetype: () => Promise<String>;
 }
 
 export interface UserConnection {

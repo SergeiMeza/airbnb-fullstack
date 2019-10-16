@@ -1,25 +1,8 @@
 import React from 'react'
-import gql from 'graphql-tag'
 import { useMutation } from 'react-apollo'
 import { LoginMutation, LoginMutationVariables } from '../../schemaTypes'
 import { normalizeErrors } from '../../utils/normalizeErrors'
-import { NormalizeErrorMap } from '../../types/NormalizeErrorMap'
-import { LoginResult } from '../Register'
-
-const LOGIN_MUTATION = gql`
-  mutation LoginMutation($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      me {
-        email
-      }
-      token
-      errors {
-        path
-        message
-      }
-    }
-  }
-`
+import { LoginResult, LOGIN_MUTATION } from '../Register'
 
 interface Props {
   children: (data: {

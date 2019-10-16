@@ -51,6 +51,7 @@ type UserLocation @embedded {
 
 type Picture @embedded {
   url: String!
+  mimetype: String!
 }
 
 # type Booking {

@@ -15,8 +15,12 @@ export class UpdateMeConnector extends React.PureComponent<
     return (
       <React.Fragment>
         <UpdateMeController>
-          {({ submit }) => (
-            <UpdateMeView onFinish={this.onFinish} submit={submit} />
+          {({ updateMeSubmit, updateMeMediaSubmit }) => (
+            <UpdateMeView
+              onFinish={this.onFinish}
+              updateMeMediaSubmit={updateMeMediaSubmit}
+              updateMeSubmit={updateMeSubmit}
+            />
           )}
         </UpdateMeController>
       </React.Fragment>

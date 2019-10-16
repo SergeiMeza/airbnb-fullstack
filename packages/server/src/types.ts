@@ -43,11 +43,6 @@ export interface UpdateMeResult {
 }
 
 export interface Media {
-  type: MediaType
-  fileId: string
-  filename: string
-  extension: string
+  mimetype: string
   url: string
 }
-
-type MediaType = 'PHOTO' | 'VIDEO' | 'VIDEO_STREAM'

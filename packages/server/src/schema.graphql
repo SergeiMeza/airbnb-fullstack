@@ -67,15 +67,6 @@ type UpdateMeResult {
 }
 
 type Media {
-  type: MediaType!
-  fileId: String!
-  filename: String!
-  extension: String!
+  mimetype: String!
   url: String!
-}
-
-enum MediaType {
-  PHOTO
-  VIDEO
-  VIDEO_STREAM
 }

@@ -10,8 +10,8 @@ import { Mutation } from "./Mutation";
 import { RegisterResult } from "./RegisterResult";
 import { AuthenticationError } from "./AuthenticationError";
 import { LoginResult } from "./LoginResult";
-import { UpdateMeMediaResult } from "./UpdateMeMediaResult";
 import { UpdateMeResult } from "./UpdateMeResult";
+import { UpdateMeMediaResult } from "./UpdateMeMediaResult";
 import { ForgotPasswordChangeResult } from "./ForgotPasswordChangeResult";
 
 export const resolvers: Resolvers = {
@@ -22,7 +22,7 @@ export const resolvers: Resolvers = {
   RegisterResult,
   AuthenticationError,
   LoginResult,
-  UpdateMeMediaResult,
   UpdateMeResult,
+  UpdateMeMediaResult,
   ForgotPasswordChangeResult
 };

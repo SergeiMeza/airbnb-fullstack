@@ -4,24 +4,15 @@
   background: #fff;
 }
 
-.main-carousel {
-  padding-top: 100px;
-  padding-bottom: 50px;
-}
-
 .ant-form-item {
   margin-bottom: 15px;
-}
-
-.main-form {
-  padding-top: 100px;
-  padding-bottom: 50px;
 }
 
 /* 
   ===========================
   Register View
 */
+
 .register-carousel {
   padding-top: 50px;
 }
@@ -42,14 +33,21 @@
   ===========================
 */
 
-.main-carousel .slick-slide {
-  text-align: center;
-  height: 400px;
-  line-height: 400px;
-  background: #364d79;
-  overflow: hidden;
+/* 
+===========================
+  Update Me
+*/
+
+.avatar-uploader {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 48px;
 }
 
-.main-carousel .slick-slide h3 {
-  color: #fff;
+.avatar-uploader > .ant-upload {
+  width: 200px;
+  height: 200px;
 }
+/* 
+  ===========================
+*/

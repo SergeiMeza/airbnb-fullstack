@@ -6,12 +6,7 @@ import { UpdateMeConnector } from '../modules/me/UpdateMeConnector'
 import { LoginConnector } from '../modules/login/LoginConnector'
 import { ForgotPasswordConnector } from '../modules/forgotPassword/ForgotPasswordConnector'
 import { AuthRoute } from '@airbnb-fullstack/controller'
-
-const DummyComponent = () => (
-  <div>
-    <h1>TEST</h1>
-  </div>
-)
+import { EmptyView } from '../modules/shared'
 
 export const Routes = () => (
   <BrowserRouter>
@@ -30,11 +25,17 @@ export const Routes = () => (
       />
 
       <AuthRoute path='/new-user' component={UpdateMeConnector} />
-      <AuthRoute path='/create-listing' component={DummyComponent} />
+      <AuthRoute path='/create-listing' component={EmptyView} />
 
-      <AuthRoute exact path='/home' component={DummyComponent} />
+      <AuthRoute exact path='/home' component={EmptyView} />
 
-      <Route exact path='/' component={RegisterConnector} />
+      <Route
+        exact
+        path='/'
+        component={
+          localStorage.getItem('token') ? EmptyView : RegisterConnector
+        }
+      />
       <Route path='/*' render={() => <Redirect to='/' />} />
     </Switch>
   </BrowserRouter>

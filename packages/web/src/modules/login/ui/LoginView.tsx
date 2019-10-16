@@ -2,6 +2,7 @@ import React from 'react'
 import { Layout, Card, Typography, Icon, Button, Row, Col, Divider } from 'antd'
 import { withFormik, FormikProps } from 'formik'
 import { Form, Input } from '@jbuschke/formik-antd'
+
 import { validUserSchema } from '@airbnb-fullstack/common'
 import { Link } from 'react-router-dom'
 import { LoginResult } from '@airbnb-fullstack/controller'

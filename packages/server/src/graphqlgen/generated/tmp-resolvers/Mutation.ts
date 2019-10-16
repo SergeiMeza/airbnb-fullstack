@@ -20,10 +20,10 @@ export const Mutation: MutationResolvers.Type = {
   logout: (parent, args, ctx) => {
     throw new Error("Resolver not implemented");
   },
-  updateMeMedia: (parent, args, ctx) => {
+  updateMe: (parent, args, ctx) => {
     throw new Error("Resolver not implemented");
   },
-  updateMe: (parent, args, ctx) => {
+  updateMeMedia: (parent, args, ctx) => {
     throw new Error("Resolver not implemented");
   }
 };
