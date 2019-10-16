@@ -47,7 +47,6 @@ export const AppHeader = () => {
             {localStorage.getItem('token') !== null ? (
               <Menu.Item key='header-sign-out'>
                 <Button
-                  ghost
                   type='danger'
                   onClick={() => {
                     localStorage.clear()
@@ -56,7 +55,13 @@ export const AppHeader = () => {
                   <Link to='/'>Sign Out</Link>
                 </Button>
               </Menu.Item>
-            ) : null}
+            ) : (
+              <Menu.Item key='header-sign-up'>
+                <Button type='default'>
+                  <Link to='/'>Create New Account</Link>
+                </Button>
+              </Menu.Item>
+            )}
           </Menu>
         </div>
       </Layout.Header>

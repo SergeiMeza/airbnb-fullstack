@@ -1,23 +1,11 @@
 import React from 'react'
-import {
-  Layout,
-  Card,
-  Typography,
-  Form,
-  Icon,
-  Button,
-  Carousel,
-  Row,
-  Col,
-  Divider,
-} from 'antd'
-import { withFormik, FormikProps, Field, Form as FForm } from 'formik'
+import { Layout, Card, Typography, Icon, Button, Row, Col, Divider } from 'antd'
+import { withFormik, FormikProps } from 'formik'
+import { Form, Input } from '@jbuschke/formik-antd'
 import { validUserSchema } from '@airbnb-fullstack/common'
-import { InputField } from '../../shared/InputField'
 import { Link } from 'react-router-dom'
 import { LoginResult } from '@airbnb-fullstack/controller'
-import { AppHeader } from '../../shared/AppHeader'
-import { RegisterFooter } from '../../shared/RegisterFooter'
+import { AppHeader, RegisterFooter } from '../../shared'
 
 interface FormValues {
   email: string
@@ -40,7 +28,7 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
               <Col span={1} />
               <Col span={22}>
                 <div style={{ paddingTop: '24px' }}>
-                  <FForm style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+                  <Form style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                     <Card
                       bordered={false}
                       style={{
@@ -55,30 +43,33 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
                         </Typography.Title>
                       </Typography>
                       <Divider />
-                      <Field
-                        name='email'
-                        prefix={
-                          <Icon
-                            type='user'
-                            style={{ color: 'rgba(0,0,0,.25)' }}
-                          />
-                        }
-                        placeholder='Email'
-                        component={InputField}
-                      />
-                      <Field
-                        name='password'
-                        type='password'
-                        prefix={
-                          <Icon
-                            type='lock'
-                            style={{ color: 'rgba(0,0,0,.25)' }}
-                          />
-                        }
-                        placeholder='Password'
-                        component={InputField}
-                      />
-                      <Form.Item>
+                      <Form.Item name='email'>
+                        <Input
+                          name='email'
+                          type='email'
+                          placeholder='Email'
+                          prefix={
+                            <Icon
+                              type='mail'
+                              style={{ color: 'rgba(0,0,0,.25)' }}
+                            />
+                          }
+                        />
+                      </Form.Item>
+                      <Form.Item name='password'>
+                        <Input
+                          name='password'
+                          type='password'
+                          placeholder='Password'
+                          prefix={
+                            <Icon
+                              type='lock'
+                              style={{ color: 'rgba(0,0,0,.25)' }}
+                            />
+                          }
+                        />
+                      </Form.Item>
+                      <Form.Item name='submit-button'>
                         <Button
                           type='primary'
                           htmlType='submit'
@@ -91,7 +82,7 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
                         <Link to='/register'>Sign up for Lollipop</Link>
                       </Form.Item>
                     </Card>
-                  </FForm>
+                  </Form>
                 </div>
               </Col>
               <Col span={1} />
@@ -115,6 +106,7 @@ export const LoginView = withFormik<Props, FormValues>({
 
     if (me !== null && token !== null) {
       localStorage.setItem('token', token)
+      localStorage.setItem('me', JSON.stringify(me))
       props.onFinish()
     }
     if (result.errors) {

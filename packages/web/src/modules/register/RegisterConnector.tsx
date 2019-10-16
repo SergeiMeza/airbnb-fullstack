@@ -6,9 +6,14 @@ import { RegisterView } from './ui/RegisterView'
 export class RegisterConnector extends React.PureComponent<
   RouteComponentProps<{}>
 > {
-  onFinish = () => {
+  onRegisterFinish = () => {
     const { history } = this.props
-    history.push('/new-user')
+    history.push('/home')
+  }
+
+  onLoginFinish = () => {
+    const { history } = this.props
+    history.push('/home')
   }
 
   render() {
@@ -17,7 +22,8 @@ export class RegisterConnector extends React.PureComponent<
         <RegisterController>
           {({ registerSubmit, loginSubmit }) => (
             <RegisterView
-              onFinish={this.onFinish}
+              onRegisterFinish={this.onRegisterFinish}
+              onLoginFinish={this.onLoginFinish}
               registerSubmit={registerSubmit}
               loginSubmit={loginSubmit}
             />

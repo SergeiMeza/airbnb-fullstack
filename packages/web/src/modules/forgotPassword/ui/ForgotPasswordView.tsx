@@ -1,22 +1,10 @@
 import React from 'react'
-import {
-  Layout,
-  Card,
-  Typography,
-  Form,
-  Icon,
-  Button,
-  Row,
-  Col,
-  Divider,
-} from 'antd'
-import { withFormik, FormikProps, Field, Form as FForm } from 'formik'
+import { Layout, Card, Typography, Icon, Button, Row, Col, Divider } from 'antd'
+import { withFormik, FormikProps } from 'formik'
+import { Form, Input } from '@jbuschke/formik-antd'
 import { validForgotPasswordSchema } from '@airbnb-fullstack/common'
-import { InputField } from '../../shared/InputField'
-// import { Link } from 'react-router-dom'
 import { NormalizeErrorMap } from '@airbnb-fullstack/controller'
-import { AppHeader } from '../../shared/AppHeader'
-import { RegisterFooter } from '../../shared/RegisterFooter'
+import { AppHeader, RegisterFooter } from '../../shared'
 
 interface FormValues {
   email: string
@@ -37,7 +25,7 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
               <Col span={2} />
               <Col span={20}>
                 <div className='main-form'>
-                  <FForm style={{ display: 'flex' }}>
+                  <Form style={{ display: 'flex' }}>
                     <div style={{ margin: 'auto' }}>
                       <Card bordered={false}>
                         <Typography>
@@ -51,30 +39,29 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
                           </Typography.Paragraph>
                         </Typography>
                         <Divider />
-                        <Field
-                          name='email'
-                          prefix={
-                            <Icon
-                              type='user'
-                              style={{ color: 'rgba(0,0,0,.25)' }}
-                            />
-                          }
-                          placeholder='Email'
-                          component={InputField}
-                        />
-                        <Form.Item>
-                          <Button
-                            type='primary'
-                            htmlType='submit'
-                            className='forgot-password-form-button'
-                            style={{ display: 'block' }}
-                          >
-                            Submit
-                          </Button>
+                        <Form.Item name='email'>
+                          <Input
+                            name='email'
+                            type='email'
+                            placeholder='Email'
+                            prefix={
+                              <Icon
+                                type='mail'
+                                style={{ color: 'rgba(0,0,0,.25)' }}
+                              />
+                            }
+                          />
                         </Form.Item>
+                        <Button
+                          type='primary'
+                          htmlType='submit'
+                          style={{ display: 'block' }}
+                        >
+                          Submit
+                        </Button>
                       </Card>
                     </div>
-                  </FForm>
+                  </Form>
                 </div>
               </Col>
               <Col span={2} />
