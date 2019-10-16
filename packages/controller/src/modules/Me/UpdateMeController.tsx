@@ -47,7 +47,7 @@ interface Props {
   }) => JSX.Element | null
 }
 
-export function RegisterController(props: Props) {
+export function UpdateMeController(props: Props) {
   const [updateMeMutation, { data, loading, error }] = useMutation<
     UpdateMeMutation,
     UpdateMeMutationVariables

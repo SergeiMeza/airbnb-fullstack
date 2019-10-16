@@ -1,5 +1,6 @@
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
+import { UpdateMeController } from '@airbnb-fullstack/controller'
 import { UpdateMeView, FormValues } from './ui/UpdateMeView'
 
 export class UpdateMeConnector extends React.PureComponent<
@@ -9,14 +10,15 @@ export class UpdateMeConnector extends React.PureComponent<
     const { history } = this.props
     history.push('/home')
   }
-  dummySubmit = async (values: FormValues) => {
-    console.log('here')
-  }
 
   render() {
     return (
       <React.Fragment>
-        <UpdateMeView onFinish={this.onFinish} submit={this.dummySubmit} />
+        <UpdateMeController>
+          {({ submit }) => (
+            <UpdateMeView onFinish={this.onFinish} submit={submit} />
+          )}
+        </UpdateMeController>
       </React.Fragment>
     )
   }

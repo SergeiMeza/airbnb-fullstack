@@ -17,6 +17,7 @@ export const Routes = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path='/login' component={LoginConnector} />
+      <Route path='/register' render={() => <Redirect to='/' />} />
       <Route
         exact
         path='/forgot-password'
@@ -27,9 +28,12 @@ export const Routes = () => (
         path='/change-password'
         component={ForgotPasswordConnector}
       />
+
       <AuthRoute path='/new-user' component={UpdateMeConnector} />
       <AuthRoute path='/create-listing' component={DummyComponent} />
-      <Route path='/register' render={() => <Redirect to='/' />} />
+
+      <AuthRoute exact path='/home' component={DummyComponent} />
+
       <Route exact path='/' component={RegisterConnector} />
       <Route path='/*' render={() => <Redirect to='/' />} />
     </Switch>
