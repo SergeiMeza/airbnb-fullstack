@@ -5,7 +5,7 @@ scalar Upload
 type User {
   email: String!
   media: Media
-  fistName: String
+  firstName: String
   lastName: String
   birthdate: DateTime
 }
@@ -32,12 +32,12 @@ type Mutation {
   #
   # USER INFO
   #
-  updateMeMedia(media: Upload!): UpdateMeMediaResult!
   updateMe(
     firstName: String
     lastName: String
     birthdate: DateTime
   ): UpdateMeResult!
+  updateMeMedia(media: Upload!): UpdateMeMediaResult!
 }
 
 type RegisterResult {

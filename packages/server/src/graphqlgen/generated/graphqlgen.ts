@@ -59,6 +59,8 @@ export namespace UserResolvers {
   export const defaultResolvers = {
     email: (parent: User) => parent.email,
     media: (parent: User) => (parent.media === undefined ? null : parent.media),
+    firstName: (parent: User) =>
+      parent.firstName === undefined ? null : parent.firstName,
     lastName: (parent: User) =>
       parent.lastName === undefined ? null : parent.lastName,
     birthdate: (parent: User) =>
@@ -99,7 +101,7 @@ export namespace UserResolvers {
         ) => Media | null | Promise<Media | null>;
       };
 
-  export type FistNameResolver =
+  export type FirstNameResolver =
     | ((
         parent: User,
         args: {},
@@ -185,7 +187,7 @@ export namespace UserResolvers {
           ) => Media | null | Promise<Media | null>;
         };
 
-    fistName:
+    firstName:
       | ((
           parent: User,
           args: {},
@@ -1024,7 +1026,8 @@ export namespace LoginResultResolvers {
 
 export namespace UpdateMeMediaResultResolvers {
   export const defaultResolvers = {
-    me: (parent: UpdateMeMediaResult) => parent.me
+    me: (parent: UpdateMeMediaResult) => parent.me,
+    token: (parent: UpdateMeMediaResult) => parent.token
   };
 
   export type MeResolver =
@@ -1044,6 +1047,23 @@ export namespace UpdateMeMediaResultResolvers {
         ) => User | Promise<User>;
       };
 
+  export type TokenResolver =
+    | ((
+        parent: UpdateMeMediaResult,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: UpdateMeMediaResult,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
   export interface Type {
     me:
       | ((
@@ -1061,12 +1081,30 @@ export namespace UpdateMeMediaResultResolvers {
             info: GraphQLResolveInfo
           ) => User | Promise<User>;
         };
+
+    token:
+      | ((
+          parent: UpdateMeMediaResult,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: UpdateMeMediaResult,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
   }
 }
 
 export namespace UpdateMeResultResolvers {
   export const defaultResolvers = {
-    me: (parent: UpdateMeResult) => parent.me
+    me: (parent: UpdateMeResult) => parent.me,
+    token: (parent: UpdateMeResult) => parent.token
   };
 
   export type MeResolver =
@@ -1086,6 +1124,23 @@ export namespace UpdateMeResultResolvers {
         ) => User | Promise<User>;
       };
 
+  export type TokenResolver =
+    | ((
+        parent: UpdateMeResult,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: UpdateMeResult,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
   export interface Type {
     me:
       | ((
@@ -1102,6 +1157,23 @@ export namespace UpdateMeResultResolvers {
             ctx: Context,
             info: GraphQLResolveInfo
           ) => User | Promise<User>;
+        };
+
+    token:
+      | ((
+          parent: UpdateMeResult,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: UpdateMeResult,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
         };
   }
 }

@@ -34,12 +34,12 @@ export interface ForgotPasswordChangeResult {
 
 export interface UpdateMeMediaResult {
   me: User
-  token: String
+  token: string
 }
 
 export interface UpdateMeResult {
   me: User
-  token: String
+  token: string
 }
 
 export interface Media {
