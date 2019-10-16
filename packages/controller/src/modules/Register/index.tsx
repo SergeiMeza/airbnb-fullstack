@@ -49,9 +49,9 @@ export function RegisterController(props: Props) {
       response &&
       response.data &&
       response.data.register &&
-      response.data.register.errors
+      (!response.data.register.me || !response.data.register.token)
     ) {
-      const errors = normalizeErrors(response.data.register.errors)
+      const errors = normalizeErrors(response.data.register.errors!)
       return {
         me: null,
         token: null,

@@ -7,7 +7,6 @@ import {
   Icon,
   Button,
   Menu,
-  Avatar,
   Carousel,
   Row,
   Col,
@@ -43,9 +42,6 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
               <Menu.Item key='1'>nav 1</Menu.Item>
               <Menu.Item key='2'>nav 2</Menu.Item>
               <Menu.Item key='3'>nav 3</Menu.Item>
-              <Menu.Item key='4'>
-                <Avatar icon='user' />
-              </Menu.Item>
             </Menu>
           </Layout.Header>
           <Layout.Content>
@@ -140,12 +136,14 @@ export const LoginView = withFormik<Props, FormValues>({
   validateOnBlur: false,
   handleSubmit: async (values, { props, setErrors, setSubmitting }) => {
     const result = await props.submit(values)
+    const { me, token } = result
+
+    if (me !== null && token !== null) {
+      localStorage.setItem('token', token)
+      props.onFinish()
+    }
     if (result.errors) {
       setErrors(result.errors)
-    } else {
-      const { me, token } = result
-      // TODO: save session
-      props.onFinish()
     }
   },
 })(C)

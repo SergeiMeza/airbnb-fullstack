@@ -28,7 +28,7 @@ class C extends React.PureComponent<ChildProps<Props, MeQuery>> {
       return (
         <Redirect
           to={{
-            pathname: '/login',
+            pathname: '/register',
             state: { next: routeProps.location.pathname },
           }}
         />

@@ -11,7 +11,14 @@ export class LoginConnector extends React.PureComponent<
       history,
       location: { state },
     } = this.props
-    if (state && state.next) {
+    if (
+      state &&
+      state.next &&
+      state.next !== '/login' &&
+      state.next !== '/register' &&
+      state.next !== '/forgot-password'
+    ) {
+      console.log('next:', state.next)
       return history.push(state.next)
     }
     history.push('/')

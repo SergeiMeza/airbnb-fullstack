@@ -3,29 +3,31 @@ import {
   Layout,
   Card,
   Form,
-  Icon,
   Button,
   Typography,
   Menu,
   Row,
   Col,
-  Carousel,
   Divider,
 } from 'antd'
 import { withFormik, FormikProps, Field, Form as FForm } from 'formik'
-import { validUserSchema } from '@airbnb-fullstack/common'
+// import { validUserSchema } from '@airbnb-fullstack/common'
 import { InputField } from '../../shared/InputField'
-import { Link } from 'react-router-dom'
-import { RegisterResult } from '@airbnb-fullstack/controller'
+// import { Link } from 'react-router-dom'
+// import { RegisterResult } from '@airbnb-fullstack/controller'
 
-interface FormValues {
-  email: string
-  password: string
+export interface FormValues {
+  firstName: string
+  lastName: string
+  birthMonth: string
+  birthDay: string
+  birthYear: string
 }
 
 interface Props {
   onFinish: () => void
-  submit: (values: FormValues) => Promise<RegisterResult>
+  // submit: (values: FormValues) => Promise<RegisterResult>
+  submit: (values: FormValues) => Promise<any>
 }
 
 class C extends React.PureComponent<FormikProps<FormValues> & Props> {
@@ -47,69 +49,58 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
           <Layout.Content>
             <Row>
               <Col span={1} />
-              <Col span={11}>
-                <div className='main-carousel'>
-                  <Carousel autoplay>
-                    <div>
-                      <h3>1</h3>
-                    </div>
-                    <div>
-                      <h3>2</h3>
-                    </div>
-                    <div>
-                      <h3>3</h3>
-                    </div>
-                    <div>
-                      <h3>4</h3>
-                    </div>
-                  </Carousel>
-                </div>
-              </Col>
-              <Col span={1} />
-              <Col span={10}>
+              <Col span={22}>
                 <div className='main-form'>
                   <FForm style={{ display: 'flex' }}>
                     <div style={{ margin: 'auto' }}>
                       <Card bordered={false}>
                         <Typography>
                           <Typography.Title level={2}>
-                            Register
+                            My Profile
                           </Typography.Title>
                         </Typography>
                         <Divider />
                         <Field
-                          name='email'
-                          prefix={
-                            <Icon
-                              type='user'
-                              style={{ color: 'rgba(0,0,0,.25)' }}
-                            />
-                          }
-                          placeholder='Email'
+                          name='firstname'
+                          placeholder='First Name'
                           component={InputField}
                         />
                         <Field
-                          name='password'
-                          type='password'
-                          prefix={
-                            <Icon
-                              type='lock'
-                              style={{ color: 'rgba(0,0,0,.25)' }}
-                            />
-                          }
-                          placeholder='Password'
+                          name='lastname'
+                          placeholder='Last Name'
+                          component={InputField}
+                        />
+                        <Typography>
+                          <Typography.Title level={3}>
+                            Birthday
+                          </Typography.Title>
+                          <Typography.Paragraph>
+                            To sign up, you need to be at least 18.
+                          </Typography.Paragraph>
+                        </Typography>
+                        <Field
+                          name='birthdaymonth'
+                          placeholder='Month'
+                          component={InputField}
+                        />
+                        <Field
+                          name='birthdayday'
+                          placeholder='Day'
+                          component={InputField}
+                        />
+                        <Field
+                          name='birthdayyear'
+                          placeholder='Year'
                           component={InputField}
                         />
                         <Form.Item>
                           <Button
                             type='primary'
                             htmlType='submit'
-                            className='login-form-button'
                             style={{ display: 'block' }}
                           >
-                            Register
+                            Begin!
                           </Button>
-                          Or <Link to='/login'>login now!</Link>
                         </Form.Item>
                       </Card>
                     </div>
@@ -130,20 +121,26 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
   }
 }
 
-export const RegisterView = withFormik<Props, FormValues>({
-  validationSchema: validUserSchema,
-  mapPropsToValues: () => ({ email: '', password: '' }),
+export const UpdateMeView = withFormik<Props, FormValues>({
+  // validationSchema: validUserSchema,
+  mapPropsToValues: () => ({
+    firstName: '',
+    lastName: '',
+    birthMonth: '',
+    birthDay: '',
+    birthYear: '',
+  }),
   validateOnChange: false,
   validateOnBlur: false,
   handleSubmit: async (values, { props, setErrors, setSubmitting }) => {
-    const result = await props.submit(values)
-    const { me, token } = result
-    if (me !== null && token !== null) {
-      localStorage.setItem('token', token)
-      props.onFinish()
-    }
-    if (result.errors) {
-      setErrors(result.errors)
-    }
+    // const result = await props.submit(values)
+    // const { me, token } = result
+    // if (me !== null && token !== null) {
+    //   localStorage.setItem('token', token)
+    //   props.onFinish()
+    // }
+    // if (result.errors) {
+    //   setErrors(result.errors)
+    // }
   },
 })(C)

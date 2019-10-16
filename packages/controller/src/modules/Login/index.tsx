@@ -41,16 +41,13 @@ export function LoginController(props: Props) {
   const submit = async (values: LoginMutationVariables) => {
     const response = await loginMutation({ variables: values })
 
-    console.log('🚀 values:', values)
-    console.log('🚀 response:', response)
-
     if (
       response &&
       response.data &&
       response.data.login &&
-      response.data.login.errors
+      (!response.data.login.me || !response.data.login.token)
     ) {
-      const errors = normalizeErrors(response.data.login.errors)
+      const errors = normalizeErrors(response.data.login.errors!)
       return {
         me: null,
         token: null,

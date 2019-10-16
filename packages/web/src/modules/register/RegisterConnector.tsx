@@ -7,14 +7,8 @@ export class RegisterConnector extends React.PureComponent<
   RouteComponentProps<{}>
 > {
   onFinish = () => {
-    const {
-      history,
-      location: { state },
-    } = this.props
-    if (state && state.next) {
-      return history.push(state.next)
-    }
-    history.push('/')
+    const { history } = this.props
+    history.push('/new-user')
   }
 
   render() {

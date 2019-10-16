@@ -4,10 +4,11 @@ import {
   RESOLVER_NOT_IMPLEMENTED,
   LOGIN_USER_NOT_FOUND,
   INVALID_USER_CREDENTIALS,
-} from '../../helpers'
+  USER_ALREADY_REGISTERED,
+} from '../../utils'
 import { db } from '../../db'
 import { validUserSchema } from '@airbnb-fullstack/common'
-import { generateToken } from '../../helpers/jwt'
+import { generateToken } from '../../utils/jwt'
 
 export const Mutation: MutationResolvers.Type = {
   ...MutationResolvers.defaultResolvers,
@@ -45,7 +46,7 @@ export const Mutation: MutationResolvers.Type = {
 
     return {
       me: { email },
-      token: generateToken({ email }),
+      token: generateToken({ u: { email } }),
       errors: [],
     }
   },
@@ -61,15 +62,23 @@ export const Mutation: MutationResolvers.Type = {
     const salt = await bcrypt.genSalt(10)
     const encryptedPassword = await bcrypt.hash(password, salt)
 
-    const user = await db.prisma.createUser({
-      email,
-      password: encryptedPassword,
-    })
+    try {
+      const user = await db.prisma.createUser({
+        email,
+        password: encryptedPassword,
+      })
 
-    return {
-      me: { email: user.email },
-      token: generateToken({ email }),
-      errors: [],
+      return {
+        me: { email: user.email },
+        token: generateToken({ u: { email } }),
+        errors: [],
+      }
+    } catch {
+      return {
+        me: null,
+        token: null,
+        errors: [{ path: 'email', message: USER_ALREADY_REGISTERED }],
+      }
     }
   },
 }
