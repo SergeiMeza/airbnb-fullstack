@@ -1,5 +1,13 @@
+# import * from "./airbnb-service/generated/airbnb-prisma.graphql"
+
+scalar Upload
+
 type User {
   email: String!
+  media: Media
+  fistName: String
+  lastName: String
+  birthdate: DateTime
 }
 
 type AuthenticationError {
@@ -12,11 +20,24 @@ type Query {
 }
 
 type Mutation {
+  #
+  # AUTHENTICATION
+  #
   register(email: String!, password: String!): RegisterResult!
   login(email: String!, password: String!): LoginResult!
   sendForgotPasswordEmail(email: String!): Boolean
   forgotPasswordChange: [AuthenticationError!]
   logout: Boolean
+
+  #
+  # USER INFO
+  #
+  updateMeMedia(media: Upload!): UpdateMeMediaResult!
+  updateMe(
+    firstName: String
+    lastName: String
+    birthdate: DateTime
+  ): UpdateMeResult!
 }
 
 type RegisterResult {
@@ -33,4 +54,28 @@ type LoginResult {
 
 type ForgotPasswordChangeResult {
   errors: [AuthenticationError!]
+}
+
+type UpdateMeMediaResult {
+  me: User!
+  token: String!
+}
+
+type UpdateMeResult {
+  me: User!
+  token: String!
+}
+
+type Media {
+  type: MediaType!
+  fileId: String!
+  filename: String!
+  extension: String!
+  url: String!
+}
+
+enum MediaType {
+  PHOTO
+  VIDEO
+  VIDEO_STREAM
 }

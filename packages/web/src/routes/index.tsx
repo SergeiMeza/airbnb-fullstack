@@ -29,8 +29,9 @@ export const Routes = () => (
       />
       <AuthRoute path='/new-user' component={UpdateMeConnector} />
       <AuthRoute path='/create-listing' component={DummyComponent} />
+      <Route path='/register' render={() => <Redirect to='/' />} />
       <Route exact path='/' component={RegisterConnector} />
-      <Route path='/*' render={() => <Redirect to='/register' />} />
+      <Route path='/*' render={() => <Redirect to='/' />} />
     </Switch>
   </BrowserRouter>
 )

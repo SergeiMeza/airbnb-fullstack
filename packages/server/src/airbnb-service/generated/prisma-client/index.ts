@@ -114,6 +114,8 @@ export type UserOrderByInput =
   | "firstName_DESC"
   | "lastName_ASC"
   | "lastName_DESC"
+  | "birthdate_ASC"
+  | "birthdate_DESC"
   | "email_ASC"
   | "email_DESC"
   | "password_ASC"
@@ -193,6 +195,14 @@ export interface UserWhereInput {
   lastName_not_starts_with?: Maybe<String>;
   lastName_ends_with?: Maybe<String>;
   lastName_not_ends_with?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
+  birthdate_not?: Maybe<DateTimeInput>;
+  birthdate_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  birthdate_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  birthdate_lt?: Maybe<DateTimeInput>;
+  birthdate_lte?: Maybe<DateTimeInput>;
+  birthdate_gt?: Maybe<DateTimeInput>;
+  birthdate_gte?: Maybe<DateTimeInput>;
   email?: Maybe<String>;
   email_not?: Maybe<String>;
   email_in?: Maybe<String[] | String>;
@@ -304,6 +314,7 @@ export interface UserCreateInput {
   id?: Maybe<ID_Input>;
   firstName?: Maybe<String>;
   lastName?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
   email: String;
   password: String;
   phone?: Maybe<String>;
@@ -340,6 +351,7 @@ export interface PictureCreateInput {
 export interface UserUpdateInput {
   firstName?: Maybe<String>;
   lastName?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   phone?: Maybe<String>;
@@ -394,6 +406,7 @@ export interface PictureUpsertNestedInput {
 export interface UserUpdateManyMutationInput {
   firstName?: Maybe<String>;
   lastName?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   phone?: Maybe<String>;
@@ -421,6 +434,7 @@ export interface User {
   updatedAt: DateTimeOutput;
   firstName?: String;
   lastName?: String;
+  birthdate?: DateTimeOutput;
   email: String;
   password: String;
   phone?: String;
@@ -437,6 +451,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   updatedAt: () => Promise<DateTimeOutput>;
   firstName: () => Promise<String>;
   lastName: () => Promise<String>;
+  birthdate: () => Promise<DateTimeOutput>;
   email: () => Promise<String>;
   password: () => Promise<String>;
   phone: () => Promise<String>;
@@ -455,6 +470,7 @@ export interface UserSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   firstName: () => Promise<AsyncIterator<String>>;
   lastName: () => Promise<AsyncIterator<String>>;
+  birthdate: () => Promise<AsyncIterator<DateTimeOutput>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   phone: () => Promise<AsyncIterator<String>>;
@@ -473,6 +489,7 @@ export interface UserNullablePromise
   updatedAt: () => Promise<DateTimeOutput>;
   firstName: () => Promise<String>;
   lastName: () => Promise<String>;
+  birthdate: () => Promise<DateTimeOutput>;
   email: () => Promise<String>;
   password: () => Promise<String>;
   phone: () => Promise<String>;
@@ -661,6 +678,7 @@ export interface UserPreviousValues {
   updatedAt: DateTimeOutput;
   firstName?: String;
   lastName?: String;
+  birthdate?: DateTimeOutput;
   email: String;
   password: String;
   phone?: String;
@@ -677,6 +695,7 @@ export interface UserPreviousValuesPromise
   updatedAt: () => Promise<DateTimeOutput>;
   firstName: () => Promise<String>;
   lastName: () => Promise<String>;
+  birthdate: () => Promise<DateTimeOutput>;
   email: () => Promise<String>;
   password: () => Promise<String>;
   phone: () => Promise<String>;
@@ -693,6 +712,7 @@ export interface UserPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   firstName: () => Promise<AsyncIterator<String>>;
   lastName: () => Promise<AsyncIterator<String>>;
+  birthdate: () => Promise<AsyncIterator<DateTimeOutput>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   phone: () => Promise<AsyncIterator<String>>;

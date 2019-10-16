@@ -104,6 +104,7 @@ type User {
   updatedAt: DateTime!
   firstName: String
   lastName: String
+  birthdate: DateTime
   email: String!
   password: String!
   phone: String
@@ -124,6 +125,7 @@ input UserCreateInput {
   id: ID
   firstName: String
   lastName: String
+  birthdate: DateTime
   email: String!
   password: String!
   phone: String
@@ -230,6 +232,8 @@ enum UserOrderByInput {
   firstName_DESC
   lastName_ASC
   lastName_DESC
+  birthdate_ASC
+  birthdate_DESC
   email_ASC
   email_DESC
   password_ASC
@@ -250,6 +254,7 @@ type UserPreviousValues {
   updatedAt: DateTime!
   firstName: String
   lastName: String
+  birthdate: DateTime
   email: String!
   password: String!
   phone: String
@@ -282,6 +287,7 @@ enum UserType {
 input UserUpdateInput {
   firstName: String
   lastName: String
+  birthdate: DateTime
   email: String
   password: String
   phone: String
@@ -295,6 +301,7 @@ input UserUpdateInput {
 input UserUpdateManyMutationInput {
   firstName: String
   lastName: String
+  birthdate: DateTime
   email: String
   password: String
   phone: String
@@ -362,6 +369,14 @@ input UserWhereInput {
   lastName_not_starts_with: String
   lastName_ends_with: String
   lastName_not_ends_with: String
+  birthdate: DateTime
+  birthdate_not: DateTime
+  birthdate_in: [DateTime!]
+  birthdate_not_in: [DateTime!]
+  birthdate_lt: DateTime
+  birthdate_lte: DateTime
+  birthdate_gt: DateTime
+  birthdate_gte: DateTime
   email: String
   email_not: String
   email_in: [String!]

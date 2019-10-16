@@ -5,18 +5,24 @@ import { Resolvers } from "../graphqlgen";
 
 import { Query } from "./Query";
 import { User } from "./User";
+import { Media } from "./Media";
 import { Mutation } from "./Mutation";
 import { RegisterResult } from "./RegisterResult";
 import { AuthenticationError } from "./AuthenticationError";
 import { LoginResult } from "./LoginResult";
+import { UpdateMeMediaResult } from "./UpdateMeMediaResult";
+import { UpdateMeResult } from "./UpdateMeResult";
 import { ForgotPasswordChangeResult } from "./ForgotPasswordChangeResult";
 
 export const resolvers: Resolvers = {
   Query,
   User,
+  Media,
   Mutation,
   RegisterResult,
   AuthenticationError,
   LoginResult,
+  UpdateMeMediaResult,
+  UpdateMeResult,
   ForgotPasswordChangeResult
 };

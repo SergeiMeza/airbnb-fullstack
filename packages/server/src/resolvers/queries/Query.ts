@@ -11,6 +11,10 @@ export const Query: QueryResolvers.Type = {
       const decodedUser: any = verifyToken(token)
       return {
         email: decodedUser.u.email,
+        firstName: decodedUser.u.firstName,
+        lastName: decodedUser.u.lastName,
+        birthdate: decodedUser.u.birthdate,
+        media: null,
       }
     } catch {
       return null

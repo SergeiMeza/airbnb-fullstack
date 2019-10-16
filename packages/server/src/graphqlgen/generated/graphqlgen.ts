@@ -3,12 +3,17 @@
 import { GraphQLResolveInfo } from "graphql";
 import {
   User,
+  Media,
   RegisterResult,
   AuthenticationError,
   LoginResult,
+  UpdateMeMediaResult,
+  UpdateMeResult,
   ForgotPasswordChangeResult,
   Context
 } from "../../types";
+
+export type MediaType = "PHOTO" | "VIDEO" | "VIDEO_STREAM";
 
 export namespace QueryResolvers {
   export const defaultResolvers = {};
@@ -52,7 +57,12 @@ export namespace QueryResolvers {
 
 export namespace UserResolvers {
   export const defaultResolvers = {
-    email: (parent: User) => parent.email
+    email: (parent: User) => parent.email,
+    media: (parent: User) => (parent.media === undefined ? null : parent.media),
+    lastName: (parent: User) =>
+      parent.lastName === undefined ? null : parent.lastName,
+    birthdate: (parent: User) =>
+      parent.birthdate === undefined ? null : parent.birthdate
   };
 
   export type EmailResolver =
@@ -72,6 +82,74 @@ export namespace UserResolvers {
         ) => string | Promise<string>;
       };
 
+  export type MediaResolver =
+    | ((
+        parent: User,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => Media | null | Promise<Media | null>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Media | null | Promise<Media | null>;
+      };
+
+  export type FistNameResolver =
+    | ((
+        parent: User,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | null | Promise<string | null>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | null | Promise<string | null>;
+      };
+
+  export type LastNameResolver =
+    | ((
+        parent: User,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | null | Promise<string | null>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | null | Promise<string | null>;
+      };
+
+  export type BirthdateResolver =
+    | ((
+        parent: User,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | null | Promise<string | null>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | null | Promise<string | null>;
+      };
+
   export interface Type {
     email:
       | ((
@@ -84,6 +162,256 @@ export namespace UserResolvers {
           fragment: string;
           resolve: (
             parent: User,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    media:
+      | ((
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Media | null | Promise<Media | null>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: User,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => Media | null | Promise<Media | null>;
+        };
+
+    fistName:
+      | ((
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | null | Promise<string | null>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: User,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | null | Promise<string | null>;
+        };
+
+    lastName:
+      | ((
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | null | Promise<string | null>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: User,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | null | Promise<string | null>;
+        };
+
+    birthdate:
+      | ((
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | null | Promise<string | null>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: User,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | null | Promise<string | null>;
+        };
+  }
+}
+
+export namespace MediaResolvers {
+  export const defaultResolvers = {
+    type: (parent: Media) => parent.type,
+    fileId: (parent: Media) => parent.fileId,
+    filename: (parent: Media) => parent.filename,
+    extension: (parent: Media) => parent.extension,
+    url: (parent: Media) => parent.url
+  };
+
+  export type TypeResolver =
+    | ((
+        parent: Media,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => MediaType | Promise<MediaType>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Media,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => MediaType | Promise<MediaType>;
+      };
+
+  export type FileIdResolver =
+    | ((
+        parent: Media,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Media,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type FilenameResolver =
+    | ((
+        parent: Media,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Media,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type ExtensionResolver =
+    | ((
+        parent: Media,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Media,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type UrlResolver =
+    | ((
+        parent: Media,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Media,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export interface Type {
+    type:
+      | ((
+          parent: Media,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => MediaType | Promise<MediaType>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Media,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => MediaType | Promise<MediaType>;
+        };
+
+    fileId:
+      | ((
+          parent: Media,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Media,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    filename:
+      | ((
+          parent: Media,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Media,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    extension:
+      | ((
+          parent: Media,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Media,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    url:
+      | ((
+          parent: Media,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Media,
             args: {},
             ctx: Context,
             info: GraphQLResolveInfo
@@ -107,6 +435,16 @@ export namespace MutationResolvers {
 
   export interface ArgsSendForgotPasswordEmail {
     email: string;
+  }
+
+  export interface ArgsUpdateMeMedia {
+    media: string;
+  }
+
+  export interface ArgsUpdateMe {
+    firstName?: string | null;
+    lastName?: string | null;
+    birthdate?: string | null;
   }
 
   export type RegisterResolver =
@@ -195,6 +533,40 @@ export namespace MutationResolvers {
           ctx: Context,
           info: GraphQLResolveInfo
         ) => boolean | null | Promise<boolean | null>;
+      };
+
+  export type UpdateMeMediaResolver =
+    | ((
+        parent: undefined,
+        args: ArgsUpdateMeMedia,
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => UpdateMeMediaResult | Promise<UpdateMeMediaResult>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: undefined,
+          args: ArgsUpdateMeMedia,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => UpdateMeMediaResult | Promise<UpdateMeMediaResult>;
+      };
+
+  export type UpdateMeResolver =
+    | ((
+        parent: undefined,
+        args: ArgsUpdateMe,
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => UpdateMeResult | Promise<UpdateMeResult>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: undefined,
+          args: ArgsUpdateMe,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => UpdateMeResult | Promise<UpdateMeResult>;
       };
 
   export interface Type {
@@ -288,6 +660,40 @@ export namespace MutationResolvers {
             ctx: Context,
             info: GraphQLResolveInfo
           ) => boolean | null | Promise<boolean | null>;
+        };
+
+    updateMeMedia:
+      | ((
+          parent: undefined,
+          args: ArgsUpdateMeMedia,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => UpdateMeMediaResult | Promise<UpdateMeMediaResult>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: undefined,
+            args: ArgsUpdateMeMedia,
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => UpdateMeMediaResult | Promise<UpdateMeMediaResult>;
+        };
+
+    updateMe:
+      | ((
+          parent: undefined,
+          args: ArgsUpdateMe,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => UpdateMeResult | Promise<UpdateMeResult>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: undefined,
+            args: ArgsUpdateMe,
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => UpdateMeResult | Promise<UpdateMeResult>;
         };
   }
 }
@@ -616,6 +1022,90 @@ export namespace LoginResultResolvers {
   }
 }
 
+export namespace UpdateMeMediaResultResolvers {
+  export const defaultResolvers = {
+    me: (parent: UpdateMeMediaResult) => parent.me
+  };
+
+  export type MeResolver =
+    | ((
+        parent: UpdateMeMediaResult,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => User | Promise<User>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: UpdateMeMediaResult,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => User | Promise<User>;
+      };
+
+  export interface Type {
+    me:
+      | ((
+          parent: UpdateMeMediaResult,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => User | Promise<User>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: UpdateMeMediaResult,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => User | Promise<User>;
+        };
+  }
+}
+
+export namespace UpdateMeResultResolvers {
+  export const defaultResolvers = {
+    me: (parent: UpdateMeResult) => parent.me
+  };
+
+  export type MeResolver =
+    | ((
+        parent: UpdateMeResult,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => User | Promise<User>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: UpdateMeResult,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => User | Promise<User>;
+      };
+
+  export interface Type {
+    me:
+      | ((
+          parent: UpdateMeResult,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => User | Promise<User>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: UpdateMeResult,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => User | Promise<User>;
+        };
+  }
+}
+
 export namespace ForgotPasswordChangeResultResolvers {
   export const defaultResolvers = {
     errors: (parent: ForgotPasswordChangeResult) => parent.errors
@@ -671,10 +1161,13 @@ export namespace ForgotPasswordChangeResultResolvers {
 export interface Resolvers {
   Query: QueryResolvers.Type;
   User: UserResolvers.Type;
+  Media: MediaResolvers.Type;
   Mutation: MutationResolvers.Type;
   RegisterResult: RegisterResultResolvers.Type;
   AuthenticationError: AuthenticationErrorResolvers.Type;
   LoginResult: LoginResultResolvers.Type;
+  UpdateMeMediaResult: UpdateMeMediaResultResolvers.Type;
+  UpdateMeResult: UpdateMeResultResolvers.Type;
   ForgotPasswordChangeResult: ForgotPasswordChangeResultResolvers.Type;
 }
 

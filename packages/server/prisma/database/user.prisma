@@ -7,6 +7,7 @@ type User {
   updatedAt: DateTime! @updatedAt
   firstName: String
   lastName: String
+  birthdate: DateTime
   email: String! @unique
   password: String!
   phone: String
