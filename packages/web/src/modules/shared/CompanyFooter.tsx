@@ -1,7 +1,7 @@
 import React from 'react'
 import { Layout, Divider, Typography, Menu } from 'antd'
 
-export const AppFooter = () => {
+export const CompanyFooter = () => {
   return (
     <Layout.Footer
       style={{ background: '#fff', height: '350px', marginTop: '50px' }}

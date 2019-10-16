@@ -15,8 +15,12 @@ export class RegisterConnector extends React.PureComponent<
     return (
       <React.Fragment>
         <RegisterController>
-          {({ submit }) => (
-            <RegisterView onFinish={this.onFinish} submit={submit} />
+          {({ registerSubmit, loginSubmit }) => (
+            <RegisterView
+              onFinish={this.onFinish}
+              registerSubmit={registerSubmit}
+              loginSubmit={loginSubmit}
+            />
           )}
         </RegisterController>
       </React.Fragment>

@@ -17,7 +17,7 @@ import { InputField } from '../../shared/InputField'
 import { Link } from 'react-router-dom'
 import { LoginResult } from '@airbnb-fullstack/controller'
 import { AppHeader } from '../../shared/AppHeader'
-import { AppFooter } from '../../shared/AppFooter'
+import { RegisterFooter } from '../../shared/RegisterFooter'
 
 interface FormValues {
   email: string
@@ -38,78 +38,66 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
           <Layout.Content>
             <Row>
               <Col span={1} />
-              <Col span={11}>
-                <div className='main-carousel'>
-                  <Carousel autoplay>
-                    <div>
-                      <h3>1</h3>
-                    </div>
-                    <div>
-                      <h3>2</h3>
-                    </div>
-                    <div>
-                      <h3>3</h3>
-                    </div>
-                    <div>
-                      <h3>4</h3>
-                    </div>
-                  </Carousel>
-                </div>
-              </Col>
-              <Col span={1} />
-              <Col span={10}>
-                <div className='main-form'>
-                  <FForm style={{ display: 'flex' }}>
-                    <div style={{ margin: 'auto' }}>
-                      <Card bordered={false}>
-                        <Typography>
-                          <Typography.Title level={2}>Login</Typography.Title>
-                        </Typography>
-                        <Divider />
-                        <Field
-                          name='email'
-                          prefix={
-                            <Icon
-                              type='user'
-                              style={{ color: 'rgba(0,0,0,.25)' }}
-                            />
-                          }
-                          placeholder='Email'
-                          component={InputField}
-                        />
-                        <Field
-                          name='password'
-                          type='password'
-                          prefix={
-                            <Icon
-                              type='lock'
-                              style={{ color: 'rgba(0,0,0,.25)' }}
-                            />
-                          }
-                          placeholder='Password'
-                          component={InputField}
-                        />
-                        <Form.Item>
-                          <Link to='/forgot-password'>Forgot password?</Link>
-                          <Button
-                            type='primary'
-                            htmlType='submit'
-                            className='login-form-button'
-                            style={{ display: 'block' }}
-                          >
-                            Login
-                          </Button>
-                          Or <Link to='/register'>register now!</Link>
-                        </Form.Item>
-                      </Card>
-                    </div>
+              <Col span={22}>
+                <div style={{ paddingTop: '24px' }}>
+                  <FForm style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+                    <Card
+                      bordered={false}
+                      style={{
+                        width: '400px',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                      }}
+                    >
+                      <Typography>
+                        <Typography.Title level={4}>
+                          Log Into Lollipop
+                        </Typography.Title>
+                      </Typography>
+                      <Divider />
+                      <Field
+                        name='email'
+                        prefix={
+                          <Icon
+                            type='user'
+                            style={{ color: 'rgba(0,0,0,.25)' }}
+                          />
+                        }
+                        placeholder='Email'
+                        component={InputField}
+                      />
+                      <Field
+                        name='password'
+                        type='password'
+                        prefix={
+                          <Icon
+                            type='lock'
+                            style={{ color: 'rgba(0,0,0,.25)' }}
+                          />
+                        }
+                        placeholder='Password'
+                        component={InputField}
+                      />
+                      <Form.Item>
+                        <Button
+                          type='primary'
+                          htmlType='submit'
+                          style={{ display: 'block', width: '100px' }}
+                        >
+                          Login
+                        </Button>
+                        <Link to='/forgot-password'>Forgot password?</Link>
+                        <span>{' ・ '}</span>
+                        <Link to='/register'>Sign up for Lollipop</Link>
+                      </Form.Item>
+                    </Card>
                   </FForm>
                 </div>
               </Col>
               <Col span={1} />
             </Row>
           </Layout.Content>
-          <AppFooter />
+          <RegisterFooter />
         </Layout>
       </div>
     )

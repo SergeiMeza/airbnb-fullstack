@@ -16,7 +16,7 @@ import { InputField } from '../../shared/InputField'
 // import { Link } from 'react-router-dom'
 import { NormalizeErrorMap } from '@airbnb-fullstack/controller'
 import { AppHeader } from '../../shared/AppHeader'
-import { AppFooter } from '../../shared/AppFooter'
+import { RegisterFooter } from '../../shared/RegisterFooter'
 
 interface FormValues {
   email: string
@@ -80,7 +80,7 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
               <Col span={2} />
             </Row>
           </Layout.Content>
-          <AppFooter />
+          <RegisterFooter />
         </Layout>
       </div>
     )

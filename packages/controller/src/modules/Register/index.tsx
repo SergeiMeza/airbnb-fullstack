@@ -1,12 +1,22 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { useMutation } from 'react-apollo'
-import { RegisterMutation, RegisterMutationVariables } from '../../schemaTypes'
+import {
+  RegisterMutation,
+  RegisterMutationVariables,
+  LoginMutation,
+  LoginMutationVariables,
+} from '../../schemaTypes'
 import { normalizeErrors } from '../../utils/normalizeErrors'
 import { NormalizeErrorMap } from '../../types/NormalizeErrorMap'
-import { LoginResult } from '../Login'
 
 export interface RegisterResult {
+  me: { email: string } | null
+  token: string | null
+  errors: NormalizeErrorMap | null
+}
+
+export interface LoginResult {
   me: { email: string } | null
   token: string | null
   errors: NormalizeErrorMap | null
@@ -27,19 +37,39 @@ const REGISTER_MUTATION = gql`
   }
 `
 
+const LOGIN_MUTATION = gql`
+  mutation LoginMutation($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      me {
+        email
+      }
+      token
+      errors {
+        path
+        message
+      }
+    }
+  }
+`
+
 interface Props {
   children: (data: {
-    submit: (values: RegisterMutationVariables) => Promise<LoginResult>
+    registerSubmit: (values: RegisterMutationVariables) => Promise<LoginResult>
+    loginSubmit: (values: LoginMutationVariables) => Promise<LoginResult>
   }) => JSX.Element | null
 }
 
 export function RegisterController(props: Props) {
-  const [registerMutation, { data, loading, error }] = useMutation<
+  const [registerMutation] = useMutation<
     RegisterMutation,
     RegisterMutationVariables
   >(REGISTER_MUTATION)
 
-  const submit = async (values: RegisterMutationVariables) => {
+  const [loginMutation] = useMutation<LoginMutation, LoginMutationVariables>(
+    LOGIN_MUTATION,
+  )
+
+  const registerSubmit = async (values: RegisterMutationVariables) => {
     const response = await registerMutation({ variables: values })
 
     console.log('🚀 values:', values)
@@ -67,5 +97,30 @@ export function RegisterController(props: Props) {
     }
   }
 
-  return props.children({ submit })
+  const loginSubmit = async (values: LoginMutationVariables) => {
+    const response = await loginMutation({ variables: values })
+
+    if (
+      response &&
+      response.data &&
+      response.data.login &&
+      (!response.data.login.me || !response.data.login.token)
+    ) {
+      const errors = normalizeErrors(response.data.login.errors!)
+      return {
+        me: null,
+        token: null,
+        errors,
+      }
+    }
+
+    const login = response.data!.login!
+    return {
+      me: login.me,
+      token: login.token,
+      errors: null,
+    }
+  }
+
+  return props.children({ registerSubmit, loginSubmit })
 }

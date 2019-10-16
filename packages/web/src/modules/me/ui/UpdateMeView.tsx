@@ -2,24 +2,11 @@ import React from 'react'
 import { Layout, Card, Typography, Row, Col, Divider } from 'antd'
 import { Form, Input, Cascader, SubmitButton } from '@jbuschke/formik-antd'
 import { Formik } from 'formik'
-// import { validUserSchema } from '@airbnb-fullstack/common'
-import { AppHeader, AppFooter } from '../../shared'
+import { AppHeader } from '../../shared'
 import { UpdateMeMutationVariables } from '@airbnb-fullstack/controller'
-
-// import { Link } from 'react-router-dom'
-// import { RegisterResult } from '@airbnb-fullstack/controller'
-
-export interface FormValues {
-  firstName: string
-  lastName: string
-  birthdayMonth: string
-  birthdayDay: string
-  birthdayYear: string
-}
 
 interface Props {
   onFinish: () => void
-  // submit: (values: FormValues) => Promise<RegisterResult>
   submit: (values: UpdateMeMutationVariables) => Promise<any>
 }
 
@@ -208,7 +195,6 @@ export class UpdateMeView extends React.PureComponent<Props> {
               <Col span={1} />
             </Row>
           </Layout.Content>
-          <AppFooter />
         </Layout>
       </div>
     )

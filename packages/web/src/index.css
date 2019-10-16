@@ -9,6 +9,39 @@
   padding-bottom: 50px;
 }
 
+.ant-form-item {
+  margin-bottom: 15px;
+}
+
+.main-form {
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+
+/* 
+  ===========================
+  Register View
+*/
+.register-carousel {
+  padding-top: 50px;
+}
+
+.register-carousel .slick-slide {
+  text-align: center;
+  height: 600px;
+  line-height: 600px;
+  background: #ababac;
+  overflow: hidden;
+}
+
+.register-carousel .slick-slide h3 {
+  color: #fff;
+}
+
+/* 
+  ===========================
+*/
+
 .main-carousel .slick-slide {
   text-align: center;
   height: 400px;
@@ -19,13 +52,4 @@
 
 .main-carousel .slick-slide h3 {
   color: #fff;
-}
-
-.main-form {
-  padding-top: 100px;
-  padding-bottom: 50px;
-}
-
-.login-form-button {
-  width: 380px;
 }

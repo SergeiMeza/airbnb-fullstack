@@ -4,12 +4,7 @@ import { useMutation } from 'react-apollo'
 import { LoginMutation, LoginMutationVariables } from '../../schemaTypes'
 import { normalizeErrors } from '../../utils/normalizeErrors'
 import { NormalizeErrorMap } from '../../types/NormalizeErrorMap'
-
-export interface LoginResult {
-  me: { email: string } | null
-  token: string | null
-  errors: NormalizeErrorMap | null
-}
+import { LoginResult } from '../Register'
 
 const LOGIN_MUTATION = gql`
   mutation LoginMutation($email: String!, $password: String!) {
