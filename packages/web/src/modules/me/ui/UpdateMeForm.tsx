@@ -7,7 +7,7 @@ import {
   UpdateMeMutationVariables,
   UpdateMeMediaMutationVariables,
 } from '@airbnb-fullstack/controller'
-import { DropZoneField, UploadField } from '../../shared/DropZoneField'
+import { UploadField } from '../../shared/DropZoneField'
 
 interface FormValues {
   media: any

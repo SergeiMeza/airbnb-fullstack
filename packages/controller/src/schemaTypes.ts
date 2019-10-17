@@ -181,6 +181,34 @@ export interface LoginMutationVariables {
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL query operation: UsersQuery
+// ====================================================
+
+export interface UsersQuery_users {
+  __typename: "MockUser";
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  gender: string;
+  company: string;
+  bio: string;
+}
+
+export interface UsersQuery {
+  users: UsersQuery_users[];
+}
+
+export interface UsersQueryVariables {
+  page: number;
+  limit: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================

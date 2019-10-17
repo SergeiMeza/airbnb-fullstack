@@ -4,20 +4,26 @@ import { GraphQLResolveInfo } from "graphql";
 import {
   User,
   Media,
+  MockUser,
   RegisterResult,
   AuthenticationError,
   LoginResult,
   UpdateMeResult,
   UpdateMeMediaResult,
-  Amenities,
   CreatePlaceResult,
   Place,
+  Amenities,
   ForgotPasswordChangeResult,
   Context
 } from "../../types";
 
 export namespace QueryResolvers {
   export const defaultResolvers = {};
+
+  export interface ArgsUsers {
+    page: number;
+    limit: number;
+  }
 
   export type MeResolver =
     | ((
@@ -36,6 +42,23 @@ export namespace QueryResolvers {
         ) => User | null | Promise<User | null>;
       };
 
+  export type UsersResolver =
+    | ((
+        parent: undefined,
+        args: ArgsUsers,
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => MockUser[] | Promise<MockUser[]>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: undefined,
+          args: ArgsUsers,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => MockUser[] | Promise<MockUser[]>;
+      };
+
   export interface Type {
     me:
       | ((
@@ -52,6 +75,23 @@ export namespace QueryResolvers {
             ctx: Context,
             info: GraphQLResolveInfo
           ) => User | null | Promise<User | null>;
+        };
+
+    users:
+      | ((
+          parent: undefined,
+          args: ArgsUsers,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => MockUser[] | Promise<MockUser[]>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: undefined,
+            args: ArgsUsers,
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => MockUser[] | Promise<MockUser[]>;
         };
   }
 }
@@ -318,6 +358,258 @@ export namespace MediaResolvers {
   }
 }
 
+export namespace MockUserResolvers {
+  export const defaultResolvers = {
+    id: (parent: MockUser) => parent.id,
+    first_name: (parent: MockUser) => parent.first_name,
+    last_name: (parent: MockUser) => parent.last_name,
+    email: (parent: MockUser) => parent.email,
+    gender: (parent: MockUser) => parent.gender,
+    company: (parent: MockUser) => parent.company,
+    bio: (parent: MockUser) => parent.bio
+  };
+
+  export type IdResolver =
+    | ((
+        parent: MockUser,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => number | Promise<number>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: MockUser,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => number | Promise<number>;
+      };
+
+  export type First_nameResolver =
+    | ((
+        parent: MockUser,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: MockUser,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type Last_nameResolver =
+    | ((
+        parent: MockUser,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: MockUser,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type EmailResolver =
+    | ((
+        parent: MockUser,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: MockUser,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type GenderResolver =
+    | ((
+        parent: MockUser,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: MockUser,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type CompanyResolver =
+    | ((
+        parent: MockUser,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: MockUser,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type BioResolver =
+    | ((
+        parent: MockUser,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: MockUser,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export interface Type {
+    id:
+      | ((
+          parent: MockUser,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => number | Promise<number>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: MockUser,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => number | Promise<number>;
+        };
+
+    first_name:
+      | ((
+          parent: MockUser,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: MockUser,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    last_name:
+      | ((
+          parent: MockUser,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: MockUser,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    email:
+      | ((
+          parent: MockUser,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: MockUser,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    gender:
+      | ((
+          parent: MockUser,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: MockUser,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    company:
+      | ((
+          parent: MockUser,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: MockUser,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    bio:
+      | ((
+          parent: MockUser,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: MockUser,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+  }
+}
+
 export namespace MutationResolvers {
   export const defaultResolvers = {};
 
@@ -328,7 +620,49 @@ export namespace MutationResolvers {
     numBeds: number;
     price: number;
     tags: string[];
-    amenities: Amenities;
+    amenities: CreateAmenitiesInput;
+  }
+  export interface CreateAmenitiesInput {
+    elevator: boolean;
+    petsAllowed: boolean;
+    internet: boolean;
+    kitchen: boolean;
+    wirelessInternet: boolean;
+    familyKidFriendly: boolean;
+    freeParkingOnPremises: boolean;
+    hotTub: boolean;
+    pool: boolean;
+    smokingAllowed: boolean;
+    wheelchairAccessible: boolean;
+    breakfast: boolean;
+    cableTv: boolean;
+    suitableForEvents: boolean;
+    dryer: boolean;
+    washer: boolean;
+    indoorFireplace: boolean;
+    tv: boolean;
+    heating: boolean;
+    hangers: boolean;
+    iron: boolean;
+    hairDryer: boolean;
+    doorman: boolean;
+    paidParkingOffPremises: boolean;
+    freeParkingOnStreet: boolean;
+    gym: boolean;
+    airConditioning: boolean;
+    shampoo: boolean;
+    essentials: boolean;
+    laptopFriendlyWorkspace: boolean;
+    privateEntrance: boolean;
+    buzzerWirelessIntercom: boolean;
+    babyBath: boolean;
+    babyMonitor: boolean;
+    babysitterRecommendations: boolean;
+    bathtub: boolean;
+    changingTable: boolean;
+    childrensBooksAndToys: boolean;
+    childrensDinnerware: boolean;
+    crib: boolean;
   }
 
   export interface ArgsRegister {
@@ -1118,6 +1452,405 @@ export namespace UpdateMeMediaResultResolvers {
             ctx: Context,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
+        };
+  }
+}
+
+export namespace CreatePlaceResultResolvers {
+  export const defaultResolvers = {
+    place: (parent: CreatePlaceResult) => parent.place
+  };
+
+  export type PlaceResolver =
+    | ((
+        parent: CreatePlaceResult,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => Place | Promise<Place>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: CreatePlaceResult,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Place | Promise<Place>;
+      };
+
+  export interface Type {
+    place:
+      | ((
+          parent: CreatePlaceResult,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Place | Promise<Place>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: CreatePlaceResult,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => Place | Promise<Place>;
+        };
+  }
+}
+
+export namespace PlaceResolvers {
+  export const defaultResolvers = {
+    id: (parent: Place) => parent.id,
+    createdAt: (parent: Place) => parent.createdAt,
+    updatedAt: (parent: Place) => parent.updatedAt,
+    name: (parent: Place) => parent.name,
+    shortDescription: (parent: Place) => parent.shortDescription,
+    description: (parent: Place) => parent.description,
+    numBeds: (parent: Place) => parent.numBeds,
+    price: (parent: Place) => parent.price,
+    amenities: (parent: Place) => parent.amenities,
+    tags: (parent: Place) => parent.tags
+  };
+
+  export type IdResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type CreatedAtResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type UpdatedAtResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type NameResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type ShortDescriptionResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type DescriptionResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type NumBedsResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => number | Promise<number>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => number | Promise<number>;
+      };
+
+  export type AmenitiesResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => Amenities | Promise<Amenities>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Amenities | Promise<Amenities>;
+      };
+
+  export type PriceResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => number | Promise<number>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => number | Promise<number>;
+      };
+
+  export type TagsResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string[] | Promise<string[]>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string[] | Promise<string[]>;
+      };
+
+  export interface Type {
+    id:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    createdAt:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    updatedAt:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    name:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    shortDescription:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    description:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    numBeds:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => number | Promise<number>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => number | Promise<number>;
+        };
+
+    amenities:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Amenities | Promise<Amenities>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => Amenities | Promise<Amenities>;
+        };
+
+    price:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => number | Promise<number>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => number | Promise<number>;
+        };
+
+    tags:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string[] | Promise<string[]>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string[] | Promise<string[]>;
         };
   }
 }
@@ -2533,405 +3266,6 @@ export namespace AmenitiesResolvers {
   }
 }
 
-export namespace CreatePlaceResultResolvers {
-  export const defaultResolvers = {
-    place: (parent: CreatePlaceResult) => parent.place
-  };
-
-  export type PlaceResolver =
-    | ((
-        parent: CreatePlaceResult,
-        args: {},
-        ctx: Context,
-        info: GraphQLResolveInfo
-      ) => Place | Promise<Place>)
-    | {
-        fragment: string;
-        resolve: (
-          parent: CreatePlaceResult,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => Place | Promise<Place>;
-      };
-
-  export interface Type {
-    place:
-      | ((
-          parent: CreatePlaceResult,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => Place | Promise<Place>)
-      | {
-          fragment: string;
-          resolve: (
-            parent: CreatePlaceResult,
-            args: {},
-            ctx: Context,
-            info: GraphQLResolveInfo
-          ) => Place | Promise<Place>;
-        };
-  }
-}
-
-export namespace PlaceResolvers {
-  export const defaultResolvers = {
-    id: (parent: Place) => parent.id,
-    createdAt: (parent: Place) => parent.createdAt,
-    updatedAt: (parent: Place) => parent.updatedAt,
-    name: (parent: Place) => parent.name,
-    shortDescription: (parent: Place) => parent.shortDescription,
-    description: (parent: Place) => parent.description,
-    numBeds: (parent: Place) => parent.numBeds,
-    price: (parent: Place) => parent.price,
-    amenities: (parent: Place) => parent.amenities,
-    tags: (parent: Place) => parent.tags
-  };
-
-  export type IdResolver =
-    | ((
-        parent: Place,
-        args: {},
-        ctx: Context,
-        info: GraphQLResolveInfo
-      ) => string | Promise<string>)
-    | {
-        fragment: string;
-        resolve: (
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string | Promise<string>;
-      };
-
-  export type CreatedAtResolver =
-    | ((
-        parent: Place,
-        args: {},
-        ctx: Context,
-        info: GraphQLResolveInfo
-      ) => string | Promise<string>)
-    | {
-        fragment: string;
-        resolve: (
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string | Promise<string>;
-      };
-
-  export type UpdatedAtResolver =
-    | ((
-        parent: Place,
-        args: {},
-        ctx: Context,
-        info: GraphQLResolveInfo
-      ) => string | Promise<string>)
-    | {
-        fragment: string;
-        resolve: (
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string | Promise<string>;
-      };
-
-  export type NameResolver =
-    | ((
-        parent: Place,
-        args: {},
-        ctx: Context,
-        info: GraphQLResolveInfo
-      ) => string | Promise<string>)
-    | {
-        fragment: string;
-        resolve: (
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string | Promise<string>;
-      };
-
-  export type ShortDescriptionResolver =
-    | ((
-        parent: Place,
-        args: {},
-        ctx: Context,
-        info: GraphQLResolveInfo
-      ) => string | Promise<string>)
-    | {
-        fragment: string;
-        resolve: (
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string | Promise<string>;
-      };
-
-  export type DescriptionResolver =
-    | ((
-        parent: Place,
-        args: {},
-        ctx: Context,
-        info: GraphQLResolveInfo
-      ) => string | Promise<string>)
-    | {
-        fragment: string;
-        resolve: (
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string | Promise<string>;
-      };
-
-  export type NumBedsResolver =
-    | ((
-        parent: Place,
-        args: {},
-        ctx: Context,
-        info: GraphQLResolveInfo
-      ) => number | Promise<number>)
-    | {
-        fragment: string;
-        resolve: (
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => number | Promise<number>;
-      };
-
-  export type AmenitiesResolver =
-    | ((
-        parent: Place,
-        args: {},
-        ctx: Context,
-        info: GraphQLResolveInfo
-      ) => Amenities | Promise<Amenities>)
-    | {
-        fragment: string;
-        resolve: (
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => Amenities | Promise<Amenities>;
-      };
-
-  export type PriceResolver =
-    | ((
-        parent: Place,
-        args: {},
-        ctx: Context,
-        info: GraphQLResolveInfo
-      ) => number | Promise<number>)
-    | {
-        fragment: string;
-        resolve: (
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => number | Promise<number>;
-      };
-
-  export type TagsResolver =
-    | ((
-        parent: Place,
-        args: {},
-        ctx: Context,
-        info: GraphQLResolveInfo
-      ) => string[] | Promise<string[]>)
-    | {
-        fragment: string;
-        resolve: (
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string[] | Promise<string[]>;
-      };
-
-  export interface Type {
-    id:
-      | ((
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string | Promise<string>)
-      | {
-          fragment: string;
-          resolve: (
-            parent: Place,
-            args: {},
-            ctx: Context,
-            info: GraphQLResolveInfo
-          ) => string | Promise<string>;
-        };
-
-    createdAt:
-      | ((
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string | Promise<string>)
-      | {
-          fragment: string;
-          resolve: (
-            parent: Place,
-            args: {},
-            ctx: Context,
-            info: GraphQLResolveInfo
-          ) => string | Promise<string>;
-        };
-
-    updatedAt:
-      | ((
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string | Promise<string>)
-      | {
-          fragment: string;
-          resolve: (
-            parent: Place,
-            args: {},
-            ctx: Context,
-            info: GraphQLResolveInfo
-          ) => string | Promise<string>;
-        };
-
-    name:
-      | ((
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string | Promise<string>)
-      | {
-          fragment: string;
-          resolve: (
-            parent: Place,
-            args: {},
-            ctx: Context,
-            info: GraphQLResolveInfo
-          ) => string | Promise<string>;
-        };
-
-    shortDescription:
-      | ((
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string | Promise<string>)
-      | {
-          fragment: string;
-          resolve: (
-            parent: Place,
-            args: {},
-            ctx: Context,
-            info: GraphQLResolveInfo
-          ) => string | Promise<string>;
-        };
-
-    description:
-      | ((
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string | Promise<string>)
-      | {
-          fragment: string;
-          resolve: (
-            parent: Place,
-            args: {},
-            ctx: Context,
-            info: GraphQLResolveInfo
-          ) => string | Promise<string>;
-        };
-
-    numBeds:
-      | ((
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => number | Promise<number>)
-      | {
-          fragment: string;
-          resolve: (
-            parent: Place,
-            args: {},
-            ctx: Context,
-            info: GraphQLResolveInfo
-          ) => number | Promise<number>;
-        };
-
-    amenities:
-      | ((
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => Amenities | Promise<Amenities>)
-      | {
-          fragment: string;
-          resolve: (
-            parent: Place,
-            args: {},
-            ctx: Context,
-            info: GraphQLResolveInfo
-          ) => Amenities | Promise<Amenities>;
-        };
-
-    price:
-      | ((
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => number | Promise<number>)
-      | {
-          fragment: string;
-          resolve: (
-            parent: Place,
-            args: {},
-            ctx: Context,
-            info: GraphQLResolveInfo
-          ) => number | Promise<number>;
-        };
-
-    tags:
-      | ((
-          parent: Place,
-          args: {},
-          ctx: Context,
-          info: GraphQLResolveInfo
-        ) => string[] | Promise<string[]>)
-      | {
-          fragment: string;
-          resolve: (
-            parent: Place,
-            args: {},
-            ctx: Context,
-            info: GraphQLResolveInfo
-          ) => string[] | Promise<string[]>;
-        };
-  }
-}
-
 export namespace ForgotPasswordChangeResultResolvers {
   export const defaultResolvers = {
     errors: (parent: ForgotPasswordChangeResult) => parent.errors
@@ -2988,15 +3322,16 @@ export interface Resolvers {
   Query: QueryResolvers.Type;
   User: UserResolvers.Type;
   Media: MediaResolvers.Type;
+  MockUser: MockUserResolvers.Type;
   Mutation: MutationResolvers.Type;
   RegisterResult: RegisterResultResolvers.Type;
   AuthenticationError: AuthenticationErrorResolvers.Type;
   LoginResult: LoginResultResolvers.Type;
   UpdateMeResult: UpdateMeResultResolvers.Type;
   UpdateMeMediaResult: UpdateMeMediaResultResolvers.Type;
-  Amenities: AmenitiesResolvers.Type;
   CreatePlaceResult: CreatePlaceResultResolvers.Type;
   Place: PlaceResolvers.Type;
+  Amenities: AmenitiesResolvers.Type;
   ForgotPasswordChangeResult: ForgotPasswordChangeResultResolvers.Type;
 }
 

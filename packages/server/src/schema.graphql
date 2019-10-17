@@ -78,6 +78,18 @@ type Amenities {
 
 type Query {
   me: User
+
+  users(page: Int!, limit: Int!): [MockUser!]!
+}
+
+type MockUser {
+  id: Int!
+  first_name: String!
+  last_name: String!
+  email: String!
+  gender: String!
+  company: String!
+  bio: String!
 }
 
 type Mutation {
@@ -136,7 +148,50 @@ input CreatePlaceInput {
   numBeds: Int!
   price: Int!
   tags: [String!]!
-  amenities: Amenities!
+  amenities: CreateAmenitiesInput!
+}
+
+input CreateAmenitiesInput {
+  elevator: Boolean!
+  petsAllowed: Boolean!
+  internet: Boolean!
+  kitchen: Boolean!
+  wirelessInternet: Boolean!
+  familyKidFriendly: Boolean!
+  freeParkingOnPremises: Boolean!
+  hotTub: Boolean!
+  pool: Boolean!
+  smokingAllowed: Boolean!
+  wheelchairAccessible: Boolean!
+  breakfast: Boolean!
+  cableTv: Boolean!
+  suitableForEvents: Boolean!
+  dryer: Boolean!
+  washer: Boolean!
+  indoorFireplace: Boolean!
+  tv: Boolean!
+  heating: Boolean!
+  hangers: Boolean!
+  iron: Boolean!
+  hairDryer: Boolean!
+  doorman: Boolean!
+  paidParkingOffPremises: Boolean!
+  freeParkingOnStreet: Boolean!
+  gym: Boolean!
+  airConditioning: Boolean!
+  shampoo: Boolean!
+  essentials: Boolean!
+  laptopFriendlyWorkspace: Boolean!
+  privateEntrance: Boolean!
+  buzzerWirelessIntercom: Boolean!
+  babyBath: Boolean!
+  babyMonitor: Boolean!
+  babysitterRecommendations: Boolean!
+  bathtub: Boolean!
+  changingTable: Boolean!
+  childrensBooksAndToys: Boolean!
+  childrensDinnerware: Boolean!
+  crib: Boolean!
 }
 
 type CreatePlaceResult {

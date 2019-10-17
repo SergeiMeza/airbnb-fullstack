@@ -7,6 +7,8 @@ import { LoginConnector } from '../modules/login/LoginConnector'
 import { ForgotPasswordConnector } from '../modules/forgotPassword/ForgotPasswordConnector'
 import { AuthRoute } from '@airbnb-fullstack/controller'
 import { EmptyView } from '../modules/shared'
+import { CreatePlaceConnector } from '../modules/places/CreatePlaceConnector'
+import { UsersConnector } from '../modules/users/UsersConnector'
 
 export const Routes = () => (
   <BrowserRouter>
@@ -24,9 +26,10 @@ export const Routes = () => (
         component={ForgotPasswordConnector}
       />
 
-      <AuthRoute path='/new-user' component={UpdateMeConnector} />
-      <AuthRoute path='/create-listing' component={EmptyView} />
+      <AuthRoute exact path='/users' component={UsersConnector} />
 
+      <AuthRoute path='/new-user' component={UpdateMeConnector} />
+      <AuthRoute path='/create-place' component={CreatePlaceConnector} />
       <AuthRoute exact path='/home' component={EmptyView} />
 
       <Route

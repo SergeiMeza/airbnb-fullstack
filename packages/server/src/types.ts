@@ -11,6 +11,16 @@ export interface User {
   birthdate: string | null
 }
 
+export interface MockUser {
+  id: number
+  first_name: string
+  last_name: string
+  email: string
+  gender: string
+  company: string
+  bio: string
+}
+
 export interface AuthenticationError {
   path: string
   message: string
