@@ -3,6 +3,7 @@ import { LoginResult } from './LoginResult'
 import { RegisterResult } from './RegisterResult'
 import { UpdateMeMediaResult } from './UpdateMeMediaResult'
 import { UpdateMeResult } from './UpdateMeResult'
+import { CreatePlaceResult } from './CreatePlaceResult'
 
 export default {
   ForgotPasswordChangeResult,
@@ -10,4 +11,5 @@ export default {
   RegisterResult,
   UpdateMeMediaResult,
   UpdateMeResult,
+  CreatePlaceResult,
 }

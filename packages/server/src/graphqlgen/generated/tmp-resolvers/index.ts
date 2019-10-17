@@ -12,6 +12,9 @@ import { AuthenticationError } from "./AuthenticationError";
 import { LoginResult } from "./LoginResult";
 import { UpdateMeResult } from "./UpdateMeResult";
 import { UpdateMeMediaResult } from "./UpdateMeMediaResult";
+import { Amenities } from "./Amenities";
+import { CreatePlaceResult } from "./CreatePlaceResult";
+import { Place } from "./Place";
 import { ForgotPasswordChangeResult } from "./ForgotPasswordChangeResult";
 
 export const resolvers: Resolvers = {
@@ -24,5 +27,8 @@ export const resolvers: Resolvers = {
   LoginResult,
   UpdateMeResult,
   UpdateMeMediaResult,
+  Amenities,
+  CreatePlaceResult,
+  Place,
   ForgotPasswordChangeResult
 };

@@ -16,6 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  place: (where?: PlaceWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -38,6 +39,25 @@ export interface Prisma {
    * Queries
    */
 
+  place: (where: PlaceWhereUniqueInput) => PlaceNullablePromise;
+  places: (args?: {
+    where?: PlaceWhereInput;
+    orderBy?: PlaceOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Place>;
+  placesConnection: (args?: {
+    where?: PlaceWhereInput;
+    orderBy?: PlaceOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => PlaceConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -63,6 +83,22 @@ export interface Prisma {
    * Mutations
    */
 
+  createPlace: (data: PlaceCreateInput) => PlacePromise;
+  updatePlace: (args: {
+    data: PlaceUpdateInput;
+    where: PlaceWhereUniqueInput;
+  }) => PlacePromise;
+  updateManyPlaces: (args: {
+    data: PlaceUpdateManyMutationInput;
+    where?: PlaceWhereInput;
+  }) => BatchPayloadPromise;
+  upsertPlace: (args: {
+    where: PlaceWhereUniqueInput;
+    create: PlaceCreateInput;
+    update: PlaceUpdateInput;
+  }) => PlacePromise;
+  deletePlace: (where: PlaceWhereUniqueInput) => PlacePromise;
+  deleteManyPlaces: (where?: PlaceWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -88,6 +124,9 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  place: (
+    where?: PlaceSubscriptionWhereInput
+  ) => PlaceSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -100,6 +139,24 @@ export interface ClientConstructor<T> {
 /**
  * Types
  */
+
+export type PlaceOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "shortDescription_ASC"
+  | "shortDescription_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "numBeds_ASC"
+  | "numBeds_DESC"
+  | "price_ASC"
+  | "price_DESC";
 
 export type UserType = "GUEST" | "HOST";
 
@@ -130,6 +187,187 @@ export type UserOrderByInput =
   | "currentUserType_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+
+export type PlaceWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface PlaceWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  shortDescription?: Maybe<String>;
+  shortDescription_not?: Maybe<String>;
+  shortDescription_in?: Maybe<String[] | String>;
+  shortDescription_not_in?: Maybe<String[] | String>;
+  shortDescription_lt?: Maybe<String>;
+  shortDescription_lte?: Maybe<String>;
+  shortDescription_gt?: Maybe<String>;
+  shortDescription_gte?: Maybe<String>;
+  shortDescription_contains?: Maybe<String>;
+  shortDescription_not_contains?: Maybe<String>;
+  shortDescription_starts_with?: Maybe<String>;
+  shortDescription_not_starts_with?: Maybe<String>;
+  shortDescription_ends_with?: Maybe<String>;
+  shortDescription_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  numBeds?: Maybe<Int>;
+  numBeds_not?: Maybe<Int>;
+  numBeds_in?: Maybe<Int[] | Int>;
+  numBeds_not_in?: Maybe<Int[] | Int>;
+  numBeds_lt?: Maybe<Int>;
+  numBeds_lte?: Maybe<Int>;
+  numBeds_gt?: Maybe<Int>;
+  numBeds_gte?: Maybe<Int>;
+  amenities?: Maybe<AmenitiesWhereInput>;
+  price?: Maybe<Int>;
+  price_not?: Maybe<Int>;
+  price_in?: Maybe<Int[] | Int>;
+  price_not_in?: Maybe<Int[] | Int>;
+  price_lt?: Maybe<Int>;
+  price_lte?: Maybe<Int>;
+  price_gt?: Maybe<Int>;
+  price_gte?: Maybe<Int>;
+  AND?: Maybe<PlaceWhereInput[] | PlaceWhereInput>;
+}
+
+export interface AmenitiesWhereInput {
+  elevator?: Maybe<Boolean>;
+  elevator_not?: Maybe<Boolean>;
+  petsAllowed?: Maybe<Boolean>;
+  petsAllowed_not?: Maybe<Boolean>;
+  internet?: Maybe<Boolean>;
+  internet_not?: Maybe<Boolean>;
+  kitchen?: Maybe<Boolean>;
+  kitchen_not?: Maybe<Boolean>;
+  wirelessInternet?: Maybe<Boolean>;
+  wirelessInternet_not?: Maybe<Boolean>;
+  familyKidFriendly?: Maybe<Boolean>;
+  familyKidFriendly_not?: Maybe<Boolean>;
+  freeParkingOnPremises?: Maybe<Boolean>;
+  freeParkingOnPremises_not?: Maybe<Boolean>;
+  hotTub?: Maybe<Boolean>;
+  hotTub_not?: Maybe<Boolean>;
+  pool?: Maybe<Boolean>;
+  pool_not?: Maybe<Boolean>;
+  smokingAllowed?: Maybe<Boolean>;
+  smokingAllowed_not?: Maybe<Boolean>;
+  wheelchairAccessible?: Maybe<Boolean>;
+  wheelchairAccessible_not?: Maybe<Boolean>;
+  breakfast?: Maybe<Boolean>;
+  breakfast_not?: Maybe<Boolean>;
+  cableTv?: Maybe<Boolean>;
+  cableTv_not?: Maybe<Boolean>;
+  suitableForEvents?: Maybe<Boolean>;
+  suitableForEvents_not?: Maybe<Boolean>;
+  dryer?: Maybe<Boolean>;
+  dryer_not?: Maybe<Boolean>;
+  washer?: Maybe<Boolean>;
+  washer_not?: Maybe<Boolean>;
+  indoorFireplace?: Maybe<Boolean>;
+  indoorFireplace_not?: Maybe<Boolean>;
+  tv?: Maybe<Boolean>;
+  tv_not?: Maybe<Boolean>;
+  heating?: Maybe<Boolean>;
+  heating_not?: Maybe<Boolean>;
+  hangers?: Maybe<Boolean>;
+  hangers_not?: Maybe<Boolean>;
+  iron?: Maybe<Boolean>;
+  iron_not?: Maybe<Boolean>;
+  hairDryer?: Maybe<Boolean>;
+  hairDryer_not?: Maybe<Boolean>;
+  doorman?: Maybe<Boolean>;
+  doorman_not?: Maybe<Boolean>;
+  paidParkingOffPremises?: Maybe<Boolean>;
+  paidParkingOffPremises_not?: Maybe<Boolean>;
+  freeParkingOnStreet?: Maybe<Boolean>;
+  freeParkingOnStreet_not?: Maybe<Boolean>;
+  gym?: Maybe<Boolean>;
+  gym_not?: Maybe<Boolean>;
+  airConditioning?: Maybe<Boolean>;
+  airConditioning_not?: Maybe<Boolean>;
+  shampoo?: Maybe<Boolean>;
+  shampoo_not?: Maybe<Boolean>;
+  essentials?: Maybe<Boolean>;
+  essentials_not?: Maybe<Boolean>;
+  laptopFriendlyWorkspace?: Maybe<Boolean>;
+  laptopFriendlyWorkspace_not?: Maybe<Boolean>;
+  privateEntrance?: Maybe<Boolean>;
+  privateEntrance_not?: Maybe<Boolean>;
+  buzzerWirelessIntercom?: Maybe<Boolean>;
+  buzzerWirelessIntercom_not?: Maybe<Boolean>;
+  babyBath?: Maybe<Boolean>;
+  babyBath_not?: Maybe<Boolean>;
+  babyMonitor?: Maybe<Boolean>;
+  babyMonitor_not?: Maybe<Boolean>;
+  babysitterRecommendations?: Maybe<Boolean>;
+  babysitterRecommendations_not?: Maybe<Boolean>;
+  bathtub?: Maybe<Boolean>;
+  bathtub_not?: Maybe<Boolean>;
+  changingTable?: Maybe<Boolean>;
+  changingTable_not?: Maybe<Boolean>;
+  childrensBooksAndToys?: Maybe<Boolean>;
+  childrensBooksAndToys_not?: Maybe<Boolean>;
+  childrensDinnerware?: Maybe<Boolean>;
+  childrensDinnerware_not?: Maybe<Boolean>;
+  crib?: Maybe<Boolean>;
+  crib_not?: Maybe<Boolean>;
+  AND?: Maybe<AmenitiesWhereInput[] | AmenitiesWhereInput>;
+}
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
@@ -324,6 +562,145 @@ export interface PictureWhereInput {
   AND?: Maybe<PictureWhereInput[] | PictureWhereInput>;
 }
 
+export interface PlaceCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  shortDescription: String;
+  description: String;
+  numBeds: Int;
+  amenities: AmenitiesCreateOneInput;
+  price: Int;
+  tags?: Maybe<PlaceCreatetagsInput>;
+}
+
+export interface AmenitiesCreateOneInput {
+  create?: Maybe<AmenitiesCreateInput>;
+}
+
+export interface AmenitiesCreateInput {
+  elevator?: Maybe<Boolean>;
+  petsAllowed?: Maybe<Boolean>;
+  internet?: Maybe<Boolean>;
+  kitchen?: Maybe<Boolean>;
+  wirelessInternet?: Maybe<Boolean>;
+  familyKidFriendly?: Maybe<Boolean>;
+  freeParkingOnPremises?: Maybe<Boolean>;
+  hotTub?: Maybe<Boolean>;
+  pool?: Maybe<Boolean>;
+  smokingAllowed?: Maybe<Boolean>;
+  wheelchairAccessible?: Maybe<Boolean>;
+  breakfast?: Maybe<Boolean>;
+  cableTv?: Maybe<Boolean>;
+  suitableForEvents?: Maybe<Boolean>;
+  dryer?: Maybe<Boolean>;
+  washer?: Maybe<Boolean>;
+  indoorFireplace?: Maybe<Boolean>;
+  tv?: Maybe<Boolean>;
+  heating?: Maybe<Boolean>;
+  hangers?: Maybe<Boolean>;
+  iron?: Maybe<Boolean>;
+  hairDryer?: Maybe<Boolean>;
+  doorman?: Maybe<Boolean>;
+  paidParkingOffPremises?: Maybe<Boolean>;
+  freeParkingOnStreet?: Maybe<Boolean>;
+  gym?: Maybe<Boolean>;
+  airConditioning?: Maybe<Boolean>;
+  shampoo?: Maybe<Boolean>;
+  essentials?: Maybe<Boolean>;
+  laptopFriendlyWorkspace?: Maybe<Boolean>;
+  privateEntrance?: Maybe<Boolean>;
+  buzzerWirelessIntercom?: Maybe<Boolean>;
+  babyBath?: Maybe<Boolean>;
+  babyMonitor?: Maybe<Boolean>;
+  babysitterRecommendations?: Maybe<Boolean>;
+  bathtub?: Maybe<Boolean>;
+  changingTable?: Maybe<Boolean>;
+  childrensBooksAndToys?: Maybe<Boolean>;
+  childrensDinnerware?: Maybe<Boolean>;
+  crib?: Maybe<Boolean>;
+}
+
+export interface PlaceCreatetagsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface PlaceUpdateInput {
+  name?: Maybe<String>;
+  shortDescription?: Maybe<String>;
+  description?: Maybe<String>;
+  numBeds?: Maybe<Int>;
+  amenities?: Maybe<AmenitiesUpdateOneRequiredInput>;
+  price?: Maybe<Int>;
+  tags?: Maybe<PlaceUpdatetagsInput>;
+}
+
+export interface AmenitiesUpdateOneRequiredInput {
+  create?: Maybe<AmenitiesCreateInput>;
+  update?: Maybe<AmenitiesUpdateDataInput>;
+  upsert?: Maybe<AmenitiesUpsertNestedInput>;
+}
+
+export interface AmenitiesUpdateDataInput {
+  elevator?: Maybe<Boolean>;
+  petsAllowed?: Maybe<Boolean>;
+  internet?: Maybe<Boolean>;
+  kitchen?: Maybe<Boolean>;
+  wirelessInternet?: Maybe<Boolean>;
+  familyKidFriendly?: Maybe<Boolean>;
+  freeParkingOnPremises?: Maybe<Boolean>;
+  hotTub?: Maybe<Boolean>;
+  pool?: Maybe<Boolean>;
+  smokingAllowed?: Maybe<Boolean>;
+  wheelchairAccessible?: Maybe<Boolean>;
+  breakfast?: Maybe<Boolean>;
+  cableTv?: Maybe<Boolean>;
+  suitableForEvents?: Maybe<Boolean>;
+  dryer?: Maybe<Boolean>;
+  washer?: Maybe<Boolean>;
+  indoorFireplace?: Maybe<Boolean>;
+  tv?: Maybe<Boolean>;
+  heating?: Maybe<Boolean>;
+  hangers?: Maybe<Boolean>;
+  iron?: Maybe<Boolean>;
+  hairDryer?: Maybe<Boolean>;
+  doorman?: Maybe<Boolean>;
+  paidParkingOffPremises?: Maybe<Boolean>;
+  freeParkingOnStreet?: Maybe<Boolean>;
+  gym?: Maybe<Boolean>;
+  airConditioning?: Maybe<Boolean>;
+  shampoo?: Maybe<Boolean>;
+  essentials?: Maybe<Boolean>;
+  laptopFriendlyWorkspace?: Maybe<Boolean>;
+  privateEntrance?: Maybe<Boolean>;
+  buzzerWirelessIntercom?: Maybe<Boolean>;
+  babyBath?: Maybe<Boolean>;
+  babyMonitor?: Maybe<Boolean>;
+  babysitterRecommendations?: Maybe<Boolean>;
+  bathtub?: Maybe<Boolean>;
+  changingTable?: Maybe<Boolean>;
+  childrensBooksAndToys?: Maybe<Boolean>;
+  childrensDinnerware?: Maybe<Boolean>;
+  crib?: Maybe<Boolean>;
+}
+
+export interface AmenitiesUpsertNestedInput {
+  update: AmenitiesUpdateDataInput;
+  create: AmenitiesCreateInput;
+}
+
+export interface PlaceUpdatetagsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface PlaceUpdateManyMutationInput {
+  name?: Maybe<String>;
+  shortDescription?: Maybe<String>;
+  description?: Maybe<String>;
+  numBeds?: Maybe<Int>;
+  price?: Maybe<Int>;
+  tags?: Maybe<PlaceUpdatetagsInput>;
+}
+
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
   firstName?: Maybe<String>;
@@ -431,6 +808,15 @@ export interface UserUpdateManyMutationInput {
   currentUserType?: Maybe<UserType>;
 }
 
+export interface PlaceSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<PlaceWhereInput>;
+  AND?: Maybe<PlaceSubscriptionWhereInput[] | PlaceSubscriptionWhereInput>;
+}
+
 export interface UserSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -442,6 +828,315 @@ export interface UserSubscriptionWhereInput {
 
 export interface NodeNode {
   id: ID_Output;
+}
+
+export interface Place {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  name: String;
+  shortDescription: String;
+  description: String;
+  numBeds: Int;
+  amenities: Amenities;
+  price: Int;
+  tags: String[];
+}
+
+export interface PlacePromise extends Promise<Place>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+  shortDescription: () => Promise<String>;
+  description: () => Promise<String>;
+  numBeds: () => Promise<Int>;
+  amenities: <T = AmenitiesPromise>() => T;
+  price: () => Promise<Int>;
+  tags: () => Promise<String[]>;
+}
+
+export interface PlaceSubscription
+  extends Promise<AsyncIterator<Place>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+  shortDescription: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  numBeds: () => Promise<AsyncIterator<Int>>;
+  amenities: <T = AmenitiesSubscription>() => T;
+  price: () => Promise<AsyncIterator<Int>>;
+  tags: () => Promise<AsyncIterator<String[]>>;
+}
+
+export interface PlaceNullablePromise
+  extends Promise<Place | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+  shortDescription: () => Promise<String>;
+  description: () => Promise<String>;
+  numBeds: () => Promise<Int>;
+  amenities: <T = AmenitiesPromise>() => T;
+  price: () => Promise<Int>;
+  tags: () => Promise<String[]>;
+}
+
+export interface Amenities {
+  elevator: Boolean;
+  petsAllowed: Boolean;
+  internet: Boolean;
+  kitchen: Boolean;
+  wirelessInternet: Boolean;
+  familyKidFriendly: Boolean;
+  freeParkingOnPremises: Boolean;
+  hotTub: Boolean;
+  pool: Boolean;
+  smokingAllowed: Boolean;
+  wheelchairAccessible: Boolean;
+  breakfast: Boolean;
+  cableTv: Boolean;
+  suitableForEvents: Boolean;
+  dryer: Boolean;
+  washer: Boolean;
+  indoorFireplace: Boolean;
+  tv: Boolean;
+  heating: Boolean;
+  hangers: Boolean;
+  iron: Boolean;
+  hairDryer: Boolean;
+  doorman: Boolean;
+  paidParkingOffPremises: Boolean;
+  freeParkingOnStreet: Boolean;
+  gym: Boolean;
+  airConditioning: Boolean;
+  shampoo: Boolean;
+  essentials: Boolean;
+  laptopFriendlyWorkspace: Boolean;
+  privateEntrance: Boolean;
+  buzzerWirelessIntercom: Boolean;
+  babyBath: Boolean;
+  babyMonitor: Boolean;
+  babysitterRecommendations: Boolean;
+  bathtub: Boolean;
+  changingTable: Boolean;
+  childrensBooksAndToys: Boolean;
+  childrensDinnerware: Boolean;
+  crib: Boolean;
+}
+
+export interface AmenitiesPromise extends Promise<Amenities>, Fragmentable {
+  elevator: () => Promise<Boolean>;
+  petsAllowed: () => Promise<Boolean>;
+  internet: () => Promise<Boolean>;
+  kitchen: () => Promise<Boolean>;
+  wirelessInternet: () => Promise<Boolean>;
+  familyKidFriendly: () => Promise<Boolean>;
+  freeParkingOnPremises: () => Promise<Boolean>;
+  hotTub: () => Promise<Boolean>;
+  pool: () => Promise<Boolean>;
+  smokingAllowed: () => Promise<Boolean>;
+  wheelchairAccessible: () => Promise<Boolean>;
+  breakfast: () => Promise<Boolean>;
+  cableTv: () => Promise<Boolean>;
+  suitableForEvents: () => Promise<Boolean>;
+  dryer: () => Promise<Boolean>;
+  washer: () => Promise<Boolean>;
+  indoorFireplace: () => Promise<Boolean>;
+  tv: () => Promise<Boolean>;
+  heating: () => Promise<Boolean>;
+  hangers: () => Promise<Boolean>;
+  iron: () => Promise<Boolean>;
+  hairDryer: () => Promise<Boolean>;
+  doorman: () => Promise<Boolean>;
+  paidParkingOffPremises: () => Promise<Boolean>;
+  freeParkingOnStreet: () => Promise<Boolean>;
+  gym: () => Promise<Boolean>;
+  airConditioning: () => Promise<Boolean>;
+  shampoo: () => Promise<Boolean>;
+  essentials: () => Promise<Boolean>;
+  laptopFriendlyWorkspace: () => Promise<Boolean>;
+  privateEntrance: () => Promise<Boolean>;
+  buzzerWirelessIntercom: () => Promise<Boolean>;
+  babyBath: () => Promise<Boolean>;
+  babyMonitor: () => Promise<Boolean>;
+  babysitterRecommendations: () => Promise<Boolean>;
+  bathtub: () => Promise<Boolean>;
+  changingTable: () => Promise<Boolean>;
+  childrensBooksAndToys: () => Promise<Boolean>;
+  childrensDinnerware: () => Promise<Boolean>;
+  crib: () => Promise<Boolean>;
+}
+
+export interface AmenitiesSubscription
+  extends Promise<AsyncIterator<Amenities>>,
+    Fragmentable {
+  elevator: () => Promise<AsyncIterator<Boolean>>;
+  petsAllowed: () => Promise<AsyncIterator<Boolean>>;
+  internet: () => Promise<AsyncIterator<Boolean>>;
+  kitchen: () => Promise<AsyncIterator<Boolean>>;
+  wirelessInternet: () => Promise<AsyncIterator<Boolean>>;
+  familyKidFriendly: () => Promise<AsyncIterator<Boolean>>;
+  freeParkingOnPremises: () => Promise<AsyncIterator<Boolean>>;
+  hotTub: () => Promise<AsyncIterator<Boolean>>;
+  pool: () => Promise<AsyncIterator<Boolean>>;
+  smokingAllowed: () => Promise<AsyncIterator<Boolean>>;
+  wheelchairAccessible: () => Promise<AsyncIterator<Boolean>>;
+  breakfast: () => Promise<AsyncIterator<Boolean>>;
+  cableTv: () => Promise<AsyncIterator<Boolean>>;
+  suitableForEvents: () => Promise<AsyncIterator<Boolean>>;
+  dryer: () => Promise<AsyncIterator<Boolean>>;
+  washer: () => Promise<AsyncIterator<Boolean>>;
+  indoorFireplace: () => Promise<AsyncIterator<Boolean>>;
+  tv: () => Promise<AsyncIterator<Boolean>>;
+  heating: () => Promise<AsyncIterator<Boolean>>;
+  hangers: () => Promise<AsyncIterator<Boolean>>;
+  iron: () => Promise<AsyncIterator<Boolean>>;
+  hairDryer: () => Promise<AsyncIterator<Boolean>>;
+  doorman: () => Promise<AsyncIterator<Boolean>>;
+  paidParkingOffPremises: () => Promise<AsyncIterator<Boolean>>;
+  freeParkingOnStreet: () => Promise<AsyncIterator<Boolean>>;
+  gym: () => Promise<AsyncIterator<Boolean>>;
+  airConditioning: () => Promise<AsyncIterator<Boolean>>;
+  shampoo: () => Promise<AsyncIterator<Boolean>>;
+  essentials: () => Promise<AsyncIterator<Boolean>>;
+  laptopFriendlyWorkspace: () => Promise<AsyncIterator<Boolean>>;
+  privateEntrance: () => Promise<AsyncIterator<Boolean>>;
+  buzzerWirelessIntercom: () => Promise<AsyncIterator<Boolean>>;
+  babyBath: () => Promise<AsyncIterator<Boolean>>;
+  babyMonitor: () => Promise<AsyncIterator<Boolean>>;
+  babysitterRecommendations: () => Promise<AsyncIterator<Boolean>>;
+  bathtub: () => Promise<AsyncIterator<Boolean>>;
+  changingTable: () => Promise<AsyncIterator<Boolean>>;
+  childrensBooksAndToys: () => Promise<AsyncIterator<Boolean>>;
+  childrensDinnerware: () => Promise<AsyncIterator<Boolean>>;
+  crib: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface AmenitiesNullablePromise
+  extends Promise<Amenities | null>,
+    Fragmentable {
+  elevator: () => Promise<Boolean>;
+  petsAllowed: () => Promise<Boolean>;
+  internet: () => Promise<Boolean>;
+  kitchen: () => Promise<Boolean>;
+  wirelessInternet: () => Promise<Boolean>;
+  familyKidFriendly: () => Promise<Boolean>;
+  freeParkingOnPremises: () => Promise<Boolean>;
+  hotTub: () => Promise<Boolean>;
+  pool: () => Promise<Boolean>;
+  smokingAllowed: () => Promise<Boolean>;
+  wheelchairAccessible: () => Promise<Boolean>;
+  breakfast: () => Promise<Boolean>;
+  cableTv: () => Promise<Boolean>;
+  suitableForEvents: () => Promise<Boolean>;
+  dryer: () => Promise<Boolean>;
+  washer: () => Promise<Boolean>;
+  indoorFireplace: () => Promise<Boolean>;
+  tv: () => Promise<Boolean>;
+  heating: () => Promise<Boolean>;
+  hangers: () => Promise<Boolean>;
+  iron: () => Promise<Boolean>;
+  hairDryer: () => Promise<Boolean>;
+  doorman: () => Promise<Boolean>;
+  paidParkingOffPremises: () => Promise<Boolean>;
+  freeParkingOnStreet: () => Promise<Boolean>;
+  gym: () => Promise<Boolean>;
+  airConditioning: () => Promise<Boolean>;
+  shampoo: () => Promise<Boolean>;
+  essentials: () => Promise<Boolean>;
+  laptopFriendlyWorkspace: () => Promise<Boolean>;
+  privateEntrance: () => Promise<Boolean>;
+  buzzerWirelessIntercom: () => Promise<Boolean>;
+  babyBath: () => Promise<Boolean>;
+  babyMonitor: () => Promise<Boolean>;
+  babysitterRecommendations: () => Promise<Boolean>;
+  bathtub: () => Promise<Boolean>;
+  changingTable: () => Promise<Boolean>;
+  childrensBooksAndToys: () => Promise<Boolean>;
+  childrensDinnerware: () => Promise<Boolean>;
+  crib: () => Promise<Boolean>;
+}
+
+export interface PlaceConnection {
+  pageInfo: PageInfo;
+  edges: PlaceEdge[];
+}
+
+export interface PlaceConnectionPromise
+  extends Promise<PlaceConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PlaceEdge>>() => T;
+  aggregate: <T = AggregatePlacePromise>() => T;
+}
+
+export interface PlaceConnectionSubscription
+  extends Promise<AsyncIterator<PlaceConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PlaceEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePlaceSubscription>() => T;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PlaceEdge {
+  node: Place;
+  cursor: String;
+}
+
+export interface PlaceEdgePromise extends Promise<PlaceEdge>, Fragmentable {
+  node: <T = PlacePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PlaceEdgeSubscription
+  extends Promise<AsyncIterator<PlaceEdge>>,
+    Fragmentable {
+  node: <T = PlaceSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregatePlace {
+  count: Int;
+}
+
+export interface AggregatePlacePromise
+  extends Promise<AggregatePlace>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePlaceSubscription
+  extends Promise<AsyncIterator<AggregatePlace>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface User {
@@ -595,29 +1290,6 @@ export interface UserConnectionSubscription
   aggregate: <T = AggregateUserSubscription>() => T;
 }
 
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
 export interface UserEdge {
   node: User;
   cursor: String;
@@ -665,6 +1337,71 @@ export interface BatchPayloadSubscription
   extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface PlaceSubscriptionPayload {
+  mutation: MutationType;
+  node: Place;
+  updatedFields: String[];
+  previousValues: PlacePreviousValues;
+}
+
+export interface PlaceSubscriptionPayloadPromise
+  extends Promise<PlaceSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PlacePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PlacePreviousValuesPromise>() => T;
+}
+
+export interface PlaceSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PlaceSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PlaceSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PlacePreviousValuesSubscription>() => T;
+}
+
+export interface PlacePreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  name: String;
+  shortDescription: String;
+  description: String;
+  numBeds: Int;
+  price: Int;
+  tags: String[];
+}
+
+export interface PlacePreviousValuesPromise
+  extends Promise<PlacePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+  shortDescription: () => Promise<String>;
+  description: () => Promise<String>;
+  numBeds: () => Promise<Int>;
+  price: () => Promise<Int>;
+  tags: () => Promise<String[]>;
+}
+
+export interface PlacePreviousValuesSubscription
+  extends Promise<AsyncIterator<PlacePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+  shortDescription: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  numBeds: () => Promise<AsyncIterator<Int>>;
+  price: () => Promise<AsyncIterator<Int>>;
+  tags: () => Promise<AsyncIterator<String[]>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -748,11 +1485,6 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-/*
 DateTime scalar input type, allowing Date
 */
 export type DateTimeInput = Date | string;
@@ -763,6 +1495,16 @@ DateTime scalar output type, which is always a string
 export type DateTimeOutput = string;
 
 /*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
+
+/*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
@@ -771,11 +1513,6 @@ export type Boolean = boolean;
 The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
 */
 export type Float = number;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
-export type Int = number;
 
 export type Long = string;
 
@@ -798,6 +1535,14 @@ export const models: Model[] = [
   },
   {
     name: "Picture",
+    embedded: true
+  },
+  {
+    name: "Place",
+    embedded: false
+  },
+  {
+    name: "Amenities",
     embedded: true
   }
 ];

@@ -25,5 +25,8 @@ export const Mutation: MutationResolvers.Type = {
   },
   updateMeMedia: (parent, args, ctx) => {
     throw new Error("Resolver not implemented");
+  },
+  createPlace: (parent, args, ctx) => {
+    throw new Error("Resolver not implemented");
   }
 };

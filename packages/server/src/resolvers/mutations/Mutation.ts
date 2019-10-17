@@ -1,7 +1,11 @@
-import { createWriteStream } from 'fs'
 import shortid from 'shortid'
 import bcrypt from 'bcryptjs'
+
+import { createWriteStream } from 'fs'
+
 import { MutationResolvers } from '../../graphqlgen/generated/graphqlgen'
+
+import { db } from '../../db'
 import {
   RESOLVER_NOT_IMPLEMENTED,
   LOGIN_USER_NOT_FOUND,
@@ -9,7 +13,6 @@ import {
   USER_ALREADY_REGISTERED,
   NOT_AUTHORIZED,
 } from '../../utils'
-import { db } from '../../db'
 import { validUserSchema } from '@airbnb-fullstack/common'
 import { generateToken, verifyToken } from '../../utils/jwt'
 
@@ -220,6 +223,40 @@ export const Mutation: MutationResolvers.Type = {
     } catch (error) {
       console.log('😅 error:', error)
       throw new Error(NOT_AUTHORIZED)
+    }
+  },
+
+  createPlace: async (parent, args, ctx) => {
+    const {
+      amenities,
+      description,
+      name,
+      numBeds,
+      price,
+      shortDescription,
+      tags,
+    } = args.input
+
+    const newPlace = await db.prisma.createPlace({
+      description,
+      name,
+      numBeds,
+      price,
+      shortDescription,
+      tags: {
+        set: tags,
+      },
+      amenities: {
+        create: {
+          ...amenities,
+        },
+      },
+    })
+
+    return {
+      place: {
+        ...newPlace,
+      },
     }
   },
 }

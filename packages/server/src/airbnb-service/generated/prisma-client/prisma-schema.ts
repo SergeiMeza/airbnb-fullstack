@@ -2,8 +2,240 @@
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-export const typeDefs = /* GraphQL */ `type AggregateUser {
+export const typeDefs = /* GraphQL */ `type AggregatePlace {
   count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type Amenities {
+  elevator: Boolean!
+  petsAllowed: Boolean!
+  internet: Boolean!
+  kitchen: Boolean!
+  wirelessInternet: Boolean!
+  familyKidFriendly: Boolean!
+  freeParkingOnPremises: Boolean!
+  hotTub: Boolean!
+  pool: Boolean!
+  smokingAllowed: Boolean!
+  wheelchairAccessible: Boolean!
+  breakfast: Boolean!
+  cableTv: Boolean!
+  suitableForEvents: Boolean!
+  dryer: Boolean!
+  washer: Boolean!
+  indoorFireplace: Boolean!
+  tv: Boolean!
+  heating: Boolean!
+  hangers: Boolean!
+  iron: Boolean!
+  hairDryer: Boolean!
+  doorman: Boolean!
+  paidParkingOffPremises: Boolean!
+  freeParkingOnStreet: Boolean!
+  gym: Boolean!
+  airConditioning: Boolean!
+  shampoo: Boolean!
+  essentials: Boolean!
+  laptopFriendlyWorkspace: Boolean!
+  privateEntrance: Boolean!
+  buzzerWirelessIntercom: Boolean!
+  babyBath: Boolean!
+  babyMonitor: Boolean!
+  babysitterRecommendations: Boolean!
+  bathtub: Boolean!
+  changingTable: Boolean!
+  childrensBooksAndToys: Boolean!
+  childrensDinnerware: Boolean!
+  crib: Boolean!
+}
+
+input AmenitiesCreateInput {
+  elevator: Boolean
+  petsAllowed: Boolean
+  internet: Boolean
+  kitchen: Boolean
+  wirelessInternet: Boolean
+  familyKidFriendly: Boolean
+  freeParkingOnPremises: Boolean
+  hotTub: Boolean
+  pool: Boolean
+  smokingAllowed: Boolean
+  wheelchairAccessible: Boolean
+  breakfast: Boolean
+  cableTv: Boolean
+  suitableForEvents: Boolean
+  dryer: Boolean
+  washer: Boolean
+  indoorFireplace: Boolean
+  tv: Boolean
+  heating: Boolean
+  hangers: Boolean
+  iron: Boolean
+  hairDryer: Boolean
+  doorman: Boolean
+  paidParkingOffPremises: Boolean
+  freeParkingOnStreet: Boolean
+  gym: Boolean
+  airConditioning: Boolean
+  shampoo: Boolean
+  essentials: Boolean
+  laptopFriendlyWorkspace: Boolean
+  privateEntrance: Boolean
+  buzzerWirelessIntercom: Boolean
+  babyBath: Boolean
+  babyMonitor: Boolean
+  babysitterRecommendations: Boolean
+  bathtub: Boolean
+  changingTable: Boolean
+  childrensBooksAndToys: Boolean
+  childrensDinnerware: Boolean
+  crib: Boolean
+}
+
+input AmenitiesCreateOneInput {
+  create: AmenitiesCreateInput
+}
+
+input AmenitiesUpdateDataInput {
+  elevator: Boolean
+  petsAllowed: Boolean
+  internet: Boolean
+  kitchen: Boolean
+  wirelessInternet: Boolean
+  familyKidFriendly: Boolean
+  freeParkingOnPremises: Boolean
+  hotTub: Boolean
+  pool: Boolean
+  smokingAllowed: Boolean
+  wheelchairAccessible: Boolean
+  breakfast: Boolean
+  cableTv: Boolean
+  suitableForEvents: Boolean
+  dryer: Boolean
+  washer: Boolean
+  indoorFireplace: Boolean
+  tv: Boolean
+  heating: Boolean
+  hangers: Boolean
+  iron: Boolean
+  hairDryer: Boolean
+  doorman: Boolean
+  paidParkingOffPremises: Boolean
+  freeParkingOnStreet: Boolean
+  gym: Boolean
+  airConditioning: Boolean
+  shampoo: Boolean
+  essentials: Boolean
+  laptopFriendlyWorkspace: Boolean
+  privateEntrance: Boolean
+  buzzerWirelessIntercom: Boolean
+  babyBath: Boolean
+  babyMonitor: Boolean
+  babysitterRecommendations: Boolean
+  bathtub: Boolean
+  changingTable: Boolean
+  childrensBooksAndToys: Boolean
+  childrensDinnerware: Boolean
+  crib: Boolean
+}
+
+input AmenitiesUpdateOneRequiredInput {
+  create: AmenitiesCreateInput
+  update: AmenitiesUpdateDataInput
+  upsert: AmenitiesUpsertNestedInput
+}
+
+input AmenitiesUpsertNestedInput {
+  update: AmenitiesUpdateDataInput!
+  create: AmenitiesCreateInput!
+}
+
+input AmenitiesWhereInput {
+  elevator: Boolean
+  elevator_not: Boolean
+  petsAllowed: Boolean
+  petsAllowed_not: Boolean
+  internet: Boolean
+  internet_not: Boolean
+  kitchen: Boolean
+  kitchen_not: Boolean
+  wirelessInternet: Boolean
+  wirelessInternet_not: Boolean
+  familyKidFriendly: Boolean
+  familyKidFriendly_not: Boolean
+  freeParkingOnPremises: Boolean
+  freeParkingOnPremises_not: Boolean
+  hotTub: Boolean
+  hotTub_not: Boolean
+  pool: Boolean
+  pool_not: Boolean
+  smokingAllowed: Boolean
+  smokingAllowed_not: Boolean
+  wheelchairAccessible: Boolean
+  wheelchairAccessible_not: Boolean
+  breakfast: Boolean
+  breakfast_not: Boolean
+  cableTv: Boolean
+  cableTv_not: Boolean
+  suitableForEvents: Boolean
+  suitableForEvents_not: Boolean
+  dryer: Boolean
+  dryer_not: Boolean
+  washer: Boolean
+  washer_not: Boolean
+  indoorFireplace: Boolean
+  indoorFireplace_not: Boolean
+  tv: Boolean
+  tv_not: Boolean
+  heating: Boolean
+  heating_not: Boolean
+  hangers: Boolean
+  hangers_not: Boolean
+  iron: Boolean
+  iron_not: Boolean
+  hairDryer: Boolean
+  hairDryer_not: Boolean
+  doorman: Boolean
+  doorman_not: Boolean
+  paidParkingOffPremises: Boolean
+  paidParkingOffPremises_not: Boolean
+  freeParkingOnStreet: Boolean
+  freeParkingOnStreet_not: Boolean
+  gym: Boolean
+  gym_not: Boolean
+  airConditioning: Boolean
+  airConditioning_not: Boolean
+  shampoo: Boolean
+  shampoo_not: Boolean
+  essentials: Boolean
+  essentials_not: Boolean
+  laptopFriendlyWorkspace: Boolean
+  laptopFriendlyWorkspace_not: Boolean
+  privateEntrance: Boolean
+  privateEntrance_not: Boolean
+  buzzerWirelessIntercom: Boolean
+  buzzerWirelessIntercom_not: Boolean
+  babyBath: Boolean
+  babyBath_not: Boolean
+  babyMonitor: Boolean
+  babyMonitor_not: Boolean
+  babysitterRecommendations: Boolean
+  babysitterRecommendations_not: Boolean
+  bathtub: Boolean
+  bathtub_not: Boolean
+  changingTable: Boolean
+  changingTable_not: Boolean
+  childrensBooksAndToys: Boolean
+  childrensBooksAndToys_not: Boolean
+  childrensDinnerware: Boolean
+  childrensDinnerware_not: Boolean
+  crib: Boolean
+  crib_not: Boolean
+  AND: [AmenitiesWhereInput!]
 }
 
 type BatchPayload {
@@ -15,6 +247,12 @@ scalar DateTime
 scalar Long
 
 type Mutation {
+  createPlace(data: PlaceCreateInput!): Place!
+  updatePlace(data: PlaceUpdateInput!, where: PlaceWhereUniqueInput!): Place
+  updateManyPlaces(data: PlaceUpdateManyMutationInput!, where: PlaceWhereInput): BatchPayload!
+  upsertPlace(where: PlaceWhereUniqueInput!, create: PlaceCreateInput!, update: PlaceUpdateInput!): Place!
+  deletePlace(where: PlaceWhereUniqueInput!): Place
+  deleteManyPlaces(where: PlaceWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -104,7 +342,216 @@ input PictureWhereInput {
   AND: [PictureWhereInput!]
 }
 
+type Place {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  shortDescription: String!
+  description: String!
+  numBeds: Int!
+  amenities: Amenities!
+  price: Int!
+  tags: [String!]!
+}
+
+type PlaceConnection {
+  pageInfo: PageInfo!
+  edges: [PlaceEdge]!
+  aggregate: AggregatePlace!
+}
+
+input PlaceCreateInput {
+  id: ID
+  name: String!
+  shortDescription: String!
+  description: String!
+  numBeds: Int!
+  amenities: AmenitiesCreateOneInput!
+  price: Int!
+  tags: PlaceCreatetagsInput
+}
+
+input PlaceCreatetagsInput {
+  set: [String!]
+}
+
+type PlaceEdge {
+  node: Place!
+  cursor: String!
+}
+
+enum PlaceOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  name_ASC
+  name_DESC
+  shortDescription_ASC
+  shortDescription_DESC
+  description_ASC
+  description_DESC
+  numBeds_ASC
+  numBeds_DESC
+  price_ASC
+  price_DESC
+}
+
+type PlacePreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  shortDescription: String!
+  description: String!
+  numBeds: Int!
+  price: Int!
+  tags: [String!]!
+}
+
+type PlaceSubscriptionPayload {
+  mutation: MutationType!
+  node: Place
+  updatedFields: [String!]
+  previousValues: PlacePreviousValues
+}
+
+input PlaceSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PlaceWhereInput
+  AND: [PlaceSubscriptionWhereInput!]
+}
+
+input PlaceUpdateInput {
+  name: String
+  shortDescription: String
+  description: String
+  numBeds: Int
+  amenities: AmenitiesUpdateOneRequiredInput
+  price: Int
+  tags: PlaceUpdatetagsInput
+}
+
+input PlaceUpdateManyMutationInput {
+  name: String
+  shortDescription: String
+  description: String
+  numBeds: Int
+  price: Int
+  tags: PlaceUpdatetagsInput
+}
+
+input PlaceUpdatetagsInput {
+  set: [String!]
+}
+
+input PlaceWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  shortDescription: String
+  shortDescription_not: String
+  shortDescription_in: [String!]
+  shortDescription_not_in: [String!]
+  shortDescription_lt: String
+  shortDescription_lte: String
+  shortDescription_gt: String
+  shortDescription_gte: String
+  shortDescription_contains: String
+  shortDescription_not_contains: String
+  shortDescription_starts_with: String
+  shortDescription_not_starts_with: String
+  shortDescription_ends_with: String
+  shortDescription_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  numBeds: Int
+  numBeds_not: Int
+  numBeds_in: [Int!]
+  numBeds_not_in: [Int!]
+  numBeds_lt: Int
+  numBeds_lte: Int
+  numBeds_gt: Int
+  numBeds_gte: Int
+  amenities: AmenitiesWhereInput
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  AND: [PlaceWhereInput!]
+}
+
+input PlaceWhereUniqueInput {
+  id: ID
+}
+
 type Query {
+  place(where: PlaceWhereUniqueInput!): Place
+  places(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Place]!
+  placesConnection(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlaceConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -112,6 +559,7 @@ type Query {
 }
 
 type Subscription {
+  place(where: PlaceSubscriptionWhereInput): PlaceSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 

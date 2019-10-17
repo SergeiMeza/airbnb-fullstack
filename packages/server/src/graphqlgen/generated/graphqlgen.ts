@@ -9,6 +9,9 @@ import {
   LoginResult,
   UpdateMeResult,
   UpdateMeMediaResult,
+  Amenities,
+  CreatePlaceResult,
+  Place,
   ForgotPasswordChangeResult,
   Context
 } from "../../types";
@@ -318,6 +321,16 @@ export namespace MediaResolvers {
 export namespace MutationResolvers {
   export const defaultResolvers = {};
 
+  export interface CreatePlaceInput {
+    name: string;
+    shortDescription: string;
+    description: string;
+    numBeds: number;
+    price: number;
+    tags: string[];
+    amenities: Amenities;
+  }
+
   export interface ArgsRegister {
     email: string;
     password: string;
@@ -340,6 +353,10 @@ export namespace MutationResolvers {
 
   export interface ArgsUpdateMeMedia {
     media: string;
+  }
+
+  export interface ArgsCreatePlace {
+    input: CreatePlaceInput;
   }
 
   export type RegisterResolver =
@@ -462,6 +479,23 @@ export namespace MutationResolvers {
           ctx: Context,
           info: GraphQLResolveInfo
         ) => UpdateMeMediaResult | Promise<UpdateMeMediaResult>;
+      };
+
+  export type CreatePlaceResolver =
+    | ((
+        parent: undefined,
+        args: ArgsCreatePlace,
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => CreatePlaceResult | Promise<CreatePlaceResult>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: undefined,
+          args: ArgsCreatePlace,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => CreatePlaceResult | Promise<CreatePlaceResult>;
       };
 
   export interface Type {
@@ -589,6 +623,23 @@ export namespace MutationResolvers {
             ctx: Context,
             info: GraphQLResolveInfo
           ) => UpdateMeMediaResult | Promise<UpdateMeMediaResult>;
+        };
+
+    createPlace:
+      | ((
+          parent: undefined,
+          args: ArgsCreatePlace,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => CreatePlaceResult | Promise<CreatePlaceResult>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: undefined,
+            args: ArgsCreatePlace,
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => CreatePlaceResult | Promise<CreatePlaceResult>;
         };
   }
 }
@@ -1071,6 +1122,1816 @@ export namespace UpdateMeMediaResultResolvers {
   }
 }
 
+export namespace AmenitiesResolvers {
+  export const defaultResolvers = {
+    elevator: (parent: Amenities) => parent.elevator,
+    petsAllowed: (parent: Amenities) => parent.petsAllowed,
+    internet: (parent: Amenities) => parent.internet,
+    kitchen: (parent: Amenities) => parent.kitchen,
+    wirelessInternet: (parent: Amenities) => parent.wirelessInternet,
+    familyKidFriendly: (parent: Amenities) => parent.familyKidFriendly,
+    freeParkingOnPremises: (parent: Amenities) => parent.freeParkingOnPremises,
+    hotTub: (parent: Amenities) => parent.hotTub,
+    pool: (parent: Amenities) => parent.pool,
+    smokingAllowed: (parent: Amenities) => parent.smokingAllowed,
+    wheelchairAccessible: (parent: Amenities) => parent.wheelchairAccessible,
+    breakfast: (parent: Amenities) => parent.breakfast,
+    cableTv: (parent: Amenities) => parent.cableTv,
+    suitableForEvents: (parent: Amenities) => parent.suitableForEvents,
+    dryer: (parent: Amenities) => parent.dryer,
+    washer: (parent: Amenities) => parent.washer,
+    indoorFireplace: (parent: Amenities) => parent.indoorFireplace,
+    tv: (parent: Amenities) => parent.tv,
+    heating: (parent: Amenities) => parent.heating,
+    hangers: (parent: Amenities) => parent.hangers,
+    iron: (parent: Amenities) => parent.iron,
+    hairDryer: (parent: Amenities) => parent.hairDryer,
+    doorman: (parent: Amenities) => parent.doorman,
+    paidParkingOffPremises: (parent: Amenities) =>
+      parent.paidParkingOffPremises,
+    freeParkingOnStreet: (parent: Amenities) => parent.freeParkingOnStreet,
+    gym: (parent: Amenities) => parent.gym,
+    airConditioning: (parent: Amenities) => parent.airConditioning,
+    shampoo: (parent: Amenities) => parent.shampoo,
+    essentials: (parent: Amenities) => parent.essentials,
+    laptopFriendlyWorkspace: (parent: Amenities) =>
+      parent.laptopFriendlyWorkspace,
+    privateEntrance: (parent: Amenities) => parent.privateEntrance,
+    buzzerWirelessIntercom: (parent: Amenities) =>
+      parent.buzzerWirelessIntercom,
+    babyBath: (parent: Amenities) => parent.babyBath,
+    babyMonitor: (parent: Amenities) => parent.babyMonitor,
+    babysitterRecommendations: (parent: Amenities) =>
+      parent.babysitterRecommendations,
+    bathtub: (parent: Amenities) => parent.bathtub,
+    changingTable: (parent: Amenities) => parent.changingTable,
+    childrensBooksAndToys: (parent: Amenities) => parent.childrensBooksAndToys,
+    childrensDinnerware: (parent: Amenities) => parent.childrensDinnerware,
+    crib: (parent: Amenities) => parent.crib
+  };
+
+  export type ElevatorResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type PetsAllowedResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type InternetResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type KitchenResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type WirelessInternetResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type FamilyKidFriendlyResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type FreeParkingOnPremisesResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type HotTubResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type PoolResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type SmokingAllowedResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type WheelchairAccessibleResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type BreakfastResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type CableTvResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type SuitableForEventsResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type DryerResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type WasherResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type IndoorFireplaceResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type TvResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type HeatingResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type HangersResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type IronResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type HairDryerResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type DoormanResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type PaidParkingOffPremisesResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type FreeParkingOnStreetResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type GymResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type AirConditioningResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type ShampooResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type EssentialsResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type LaptopFriendlyWorkspaceResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type PrivateEntranceResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type BuzzerWirelessIntercomResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type BabyBathResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type BabyMonitorResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type BabysitterRecommendationsResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type BathtubResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type ChangingTableResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type ChildrensBooksAndToysResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type ChildrensDinnerwareResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export type CribResolver =
+    | ((
+        parent: Amenities,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => boolean | Promise<boolean>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>;
+      };
+
+  export interface Type {
+    elevator:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    petsAllowed:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    internet:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    kitchen:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    wirelessInternet:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    familyKidFriendly:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    freeParkingOnPremises:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    hotTub:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    pool:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    smokingAllowed:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    wheelchairAccessible:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    breakfast:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    cableTv:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    suitableForEvents:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    dryer:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    washer:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    indoorFireplace:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    tv:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    heating:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    hangers:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    iron:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    hairDryer:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    doorman:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    paidParkingOffPremises:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    freeParkingOnStreet:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    gym:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    airConditioning:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    shampoo:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    essentials:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    laptopFriendlyWorkspace:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    privateEntrance:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    buzzerWirelessIntercom:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    babyBath:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    babyMonitor:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    babysitterRecommendations:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    bathtub:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    changingTable:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    childrensBooksAndToys:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    childrensDinnerware:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+
+    crib:
+      | ((
+          parent: Amenities,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => boolean | Promise<boolean>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Amenities,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => boolean | Promise<boolean>;
+        };
+  }
+}
+
+export namespace CreatePlaceResultResolvers {
+  export const defaultResolvers = {
+    place: (parent: CreatePlaceResult) => parent.place
+  };
+
+  export type PlaceResolver =
+    | ((
+        parent: CreatePlaceResult,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => Place | Promise<Place>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: CreatePlaceResult,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Place | Promise<Place>;
+      };
+
+  export interface Type {
+    place:
+      | ((
+          parent: CreatePlaceResult,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Place | Promise<Place>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: CreatePlaceResult,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => Place | Promise<Place>;
+        };
+  }
+}
+
+export namespace PlaceResolvers {
+  export const defaultResolvers = {
+    id: (parent: Place) => parent.id,
+    createdAt: (parent: Place) => parent.createdAt,
+    updatedAt: (parent: Place) => parent.updatedAt,
+    name: (parent: Place) => parent.name,
+    shortDescription: (parent: Place) => parent.shortDescription,
+    description: (parent: Place) => parent.description,
+    numBeds: (parent: Place) => parent.numBeds,
+    price: (parent: Place) => parent.price,
+    amenities: (parent: Place) => parent.amenities,
+    tags: (parent: Place) => parent.tags
+  };
+
+  export type IdResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type CreatedAtResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type UpdatedAtResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type NameResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type ShortDescriptionResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type DescriptionResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type NumBedsResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => number | Promise<number>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => number | Promise<number>;
+      };
+
+  export type AmenitiesResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => Amenities | Promise<Amenities>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Amenities | Promise<Amenities>;
+      };
+
+  export type PriceResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => number | Promise<number>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => number | Promise<number>;
+      };
+
+  export type TagsResolver =
+    | ((
+        parent: Place,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string[] | Promise<string[]>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string[] | Promise<string[]>;
+      };
+
+  export interface Type {
+    id:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    createdAt:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    updatedAt:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    name:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    shortDescription:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    description:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    numBeds:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => number | Promise<number>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => number | Promise<number>;
+        };
+
+    amenities:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Amenities | Promise<Amenities>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => Amenities | Promise<Amenities>;
+        };
+
+    price:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => number | Promise<number>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => number | Promise<number>;
+        };
+
+    tags:
+      | ((
+          parent: Place,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string[] | Promise<string[]>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Place,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string[] | Promise<string[]>;
+        };
+  }
+}
+
 export namespace ForgotPasswordChangeResultResolvers {
   export const defaultResolvers = {
     errors: (parent: ForgotPasswordChangeResult) => parent.errors
@@ -1133,6 +2994,9 @@ export interface Resolvers {
   LoginResult: LoginResultResolvers.Type;
   UpdateMeResult: UpdateMeResultResolvers.Type;
   UpdateMeMediaResult: UpdateMeMediaResultResolvers.Type;
+  Amenities: AmenitiesResolvers.Type;
+  CreatePlaceResult: CreatePlaceResultResolvers.Type;
+  Place: PlaceResolvers.Type;
   ForgotPasswordChangeResult: ForgotPasswordChangeResultResolvers.Type;
 }
 
